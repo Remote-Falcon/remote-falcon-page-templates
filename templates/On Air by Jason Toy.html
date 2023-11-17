@@ -1,0 +1,668 @@
+<!--
+   For more information on the different parts of the Viewer Page, check out the docs!
+   https://docs.remotefalcon.com/docs/control-panel/viewer-page#viewer-page-elements
+-->
+
+<!--
+    The section between the <style type="text/css"> and </style> is used to customize your viewer page.
+    Do not delete any items in this section unless you know what they are doing.
+    This section is where you can custom design your webpage the way you want it by changing the values for the particular section.
+-->
+<link href='https://fonts.googleapis.com/css?family=Fredericka the Great|Comfortaa|Rock Salt' rel='stylesheet'>
+<style type="text/css">
+
+    /***************
+        Base Config-- This section defines the base configuration for your page, the font and font color
+    *******************/
+
+    * {
+        box-sizing: border-box;
+        font-family: 'Fredericka the Great', cursive;
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    /*******************************
+        The body section is for configuring the overall looks of the page such as the background color
+        and background image. If you want to use a background image
+        delete the comments and it is recommended to set a size to ensure if fits how you intend it.
+        If you want the image to tile to fill the whole page then set the background-repeat to repeat.
+    *******************************/
+
+    body {
+        /**
+        background-image: url(yourBackgroundImage.html);
+        background-repeat: repeat;
+        background-size: 300px 100px;
+        **/
+        background-color: #BF2C31; /** sets the overall background color **/
+        border: none;
+        margin: auto;
+        width: auto;
+    }
+
+    /*******************************
+        The div section is for configuring looks of the div sections
+    *******************************/
+
+    div{
+        font-size: 11px;
+        line-height: 1.5;
+        text-align: center;
+        /** only needed if you want a different text color
+        color: #000000;
+        **/
+    }
+    a:link, a:visited {
+        color: #FFFFFF;
+        font-family: 'Comfortaa', cursive;
+
+    }
+    /*******************************
+        The #header_Img_Content section is for configuring looks for that section
+    *******************************/
+
+    #header_Img_Content{
+        /** only needed if you want a different background color for that section
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    /***************
+        the body text is the generic style for your normal text areas
+    *****************/
+
+    .body_text{
+        /** only needed if you want a different background color for all of the body text sections
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 90%;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'Comfortaa', cursive;
+    }
+
+    /*************
+        The body_text will provide the format for all the text areas, but if you need more control
+        of that specific section, then you can configure it in this section
+    ****************/
+
+    /*********************
+        #instructional-text{
+            background-color: #000000;
+            margin: auto;
+            width: 90%;
+            color: #7e8c8d;
+            text-align: center;
+            font-size: 18px;
+        }
+    **********************/
+
+    /*****************
+        This will format the footer
+    **************************/
+
+    #footer{
+        background-color: #1A2F4C;
+        margin: auto;
+        width: 100%;
+        color: #ffffff;;
+        text-align: center;
+        font-size: 12px;
+    }
+
+
+    /*******************************
+        The #intro section is for configuring looks for that section
+    *******************************/
+
+    #intro{
+
+        /** only needed if you want a different background color for all of the body text sections
+        background-color: #BF2C31;
+        **/
+        margin: auto;
+        width: 100%;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    /*******************************
+        The #header section is for configuring looks for that section
+    *******************************/
+
+    #header{
+        /** only needed if you want a different background color for all of the body text sections**/
+        background-color: #BF2C31;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    /*******************************
+        The #bodyarea section is for configuring looks for that section
+    *******************************/
+
+    #bodyarea{
+        /** only needed if you want a different background color for all of the body text sections**/
+        background-color: #008B6B;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    /*******************************
+        The playlists-container is used to configure the section where the
+        list of your songs is shown
+    *******************************/
+
+    #playlists_container{
+        /** only needed if you want a different background color for this section
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 90%;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: 'Rock Salt', cursive;
+    }
+
+    /*******************************
+        The rf-titles is used to configure the title above the RF imported data
+    *******************************/
+
+    .rf-titles{
+        /** only needed if you want a different background color for for this section
+        background-color: #000000;
+        **/
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    /*******************************
+        The playing-now class is used to configure the text that shows what is currently playing
+    *******************************/
+
+    .playing-now {
+        /*text-align: left; */
+        margin-top: 10px;
+        color: FFFFF;
+        font-size: 20px;
+        font-family: 'Rock Salt', cursive;
+    }
+
+    /*******************************
+        The rtable is used to configure table where the rf lists will show
+        You shouldn't modify this
+    *******************************/
+
+    .rtable {
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        text-align: center;
+        width: 90%;
+        padding: 0;
+    }
+
+    /*******************************
+        The cell-vote-playlist is used to configure the table where the rf lists will show when you are using the voting mode
+        You shouldn't modify this with the exception of the font-size, border and cursor properties
+    *******************************/
+
+    .cell-vote-playlist {
+        flex-grow: 1;
+        width: 80%;
+        font-weight: bold;
+        overflow: hidden;
+        list-style: none;
+        font-size: 20px;
+        font-family: 'Rock Salt', cursive;
+        border: solid white;
+        border-width: 2px 2px 1px 2px;
+        cursor: pointer;
+    }
+
+    /*******************************
+        The cell-vote is used to configure the table where the rf lists will show when you are using the voting mode
+        You shouldn't modify this with the exception of the font-size, border and cursor properties
+    *******************************/
+
+    .cell-vote {
+        flex-grow: 1;
+        width: 20%;
+        font-weight: bold;
+        overflow: hidden;
+        list-style: none;
+        font-size: 20px;
+        font-family: 'Rock Salt', cursive;
+        border: solid white;
+        border-width: 2px 2px 1px 0px;
+
+    }
+
+    /*******************************
+        The jukebox-list is used to configure the table where the rf lists will show when you are using the jukebox mode
+        You shouldn't modify this with the exception of the font-size, border and cursor properties
+    *******************************/
+
+
+    .jukebox-list{
+        width: 100%;
+        font-size: 24px;
+        border: solid white;
+        cursor: pointer;
+        font-family: 'Rock Salt', cursive;
+        font-weight: bold;
+        border-width: 2px 2px 1px 2px;
+        /**cursor:grabbing ; **/
+
+    }
+
+    /*******************************
+        The jukebox-queue is used to configure the list of current jukebox requests
+    *******************************/
+
+    .jukebox-queue {
+        text-align: center;
+        font-family: 'Rock Salt', cursive;
+        color: white;
+        font-size: 20px;
+    }
+
+    /*******************************
+        The jukebox-queue container is the wrapper container for the jukebox queue list
+    *******************************/
+
+    .jukebox-queue-container {
+        overflow: auto;
+        height: 150px;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    /*******************************
+        The after-hours class is used to configure a message to be displayed when
+        you don't have a scheduled playlist playing
+    *******************************/
+
+    .after-hours{
+        width: 90%;
+        font-size: 30px;
+        border: none;
+        font-weight: bold;
+        margin: auto;
+    }
+
+    /*******************************
+        The button is used to configure your buttons
+    *******************************/
+
+    .button{
+        background-color: #D0021B;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    #submit {
+        background-color: #d60000;
+        padding: 1em;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+        border: none;
+    }
+
+    #submit:hover {
+        border: none;
+        background: #e60000;
+        box-shadow: 0px 0px 1px #777;
+    }
+
+    /*******************************
+        The innerRequestSuccessful is used to configure the message for sucessful requests
+    *******************************/
+
+    .innerRequestSuccessful {
+        position: fixed;
+        top: 50%;
+        margin-left: 10%;
+        background-color: #008B6B;
+        width: 80%;
+        transform: translateY(-50%);
+        color: #FFF;
+        text-align: center;
+        font-family: 'Comfortaa', cursive;
+        font-size: 24px;
+        font-weight: bold;
+        opacity: .9;
+        border-radius: 10px;
+    }
+
+    /*******************************
+        The failed_Info_Box is used to configure the message for unsucessful requests
+    *******************************/
+    .failed_Info_Box{
+        position: fixed;
+        background-color: #BF2C31;
+        top: 50%;
+        margin-left: 10%;
+        width: 80%;
+        transform: translateY(-50%);
+        color: #FFF;
+        text-align: center;
+        font-family: 'Comfortaa', cursive;
+        font-size: 24px;
+        font-weight: bold;
+        opacity: .9;
+        border-radius: 10px;
+    }
+
+    .category-label {
+        font-size: 24px;
+        font-weight: bold;
+        margin: auto;
+        width: 80%;
+        padding-top: 10px;
+        color: white;
+    }
+
+    .category-section {
+        padding-bottom: 10px;
+    }
+</style>
+
+<!-- ######### HEADER AREA #########-->
+
+<div id="header">
+
+    <!-- if you want a picture in your header, you will have to store it on a secure server or it
+    might not display correctly
+    -->
+
+    <div id="header_Img_Content">
+        <!-- Note that the Show Name is part of the image sourced below. To modify, you will need to download the image
+        from the link and update it using an image tool (I personally use and recommend GIMP). -->
+        <img src="https://i.postimg.cc/2SYPrBcn/merryxmas-header-copy.png" alt="merry-xmas" style="max-width: 100%;height:auto;margin: auto;">
+    </div>
+    <div id="intro">
+        <img src="https://i.postimg.cc/nLt45NDM/maps-icon.png" alt="Wesely-Lights" style="max-width: 15%;height:auto;margin: auto;">
+        <div style="font-size: 20px; font-family: 'Comfortaa', cursive;">
+            <a href="https://goo.gl/maps/YiCyFAiHX4etgA1PA">
+                **Your Address** </a></div>
+        <div {after-hours-message}>
+            <img src="https://i.postimg.cc/L5X1zDF9/off-air.png" alt="off-air" style="max-width: 30%;height:auto;margin: auto;">
+        </div>
+        <div {jukebox-dynamic-container}>
+            <img src="https://i.postimg.cc/PxJzdTVr/on-air.gif" alt="on-air" style="max-width: 30%;height:auto;margin: auto;">
+            <div style="font-size: 30px; font-family: 'Fredericka the Great', cursive;">Tune Radio To: <br />**.* FM </div>
+        </div>
+        <div {playlist-voting-dynamic-container}>
+            <img src="https://i.postimg.cc/PxJzdTVr/on-air.gif" alt="on-air" style="max-width: 30%;height:auto;margin: auto;">
+            <div style="font-size: 30px; font-family: 'Fredericka the Great', cursive;">Tune Radio To: <br />**.* FM </div>
+        </div>
+    </div>
+    <div {jukebox-dynamic-container}>
+        <div class="body_text" id="intro-text">
+            <!-- This section is what shows what is currently playing Don't delete -->
+            <div class="rf-titles">
+                On Now:
+            </div>
+            <div class= "playing-now">
+                {NOW_PLAYING}
+            </div>
+            <p class="rf-titles">Next Up:</p>
+            <div style="text-align: center; color: white; font-size: 20px; font-family: 'Rock Salt', cursive;">
+                {NEXT_PLAYLIST}
+            </div>
+            <div class="jukebox-queue-container">
+                {JUKEBOX_QUEUE}
+            </div>
+        </div>
+    </div>
+    <div {playlist-voting-dynamic-container}>
+        <div class="body_text" id="intro-text">
+            <!-- This section is what shows what is currently playing Don't delete -->
+
+            <div class="rf-titles">
+                On Now:
+            </div>
+
+            <div class= "playing-now">
+                {NOW_PLAYING}
+            </div>
+        </div>
+    </div>
+    <div>
+        <img src="https://iili.io/FvcY2j.png" alt="xmas-holly" style="max-width: 100%; height: auto;margin: auto;">
+    </div>
+</div>
+<!-- ######### BODY & NOW PLAYING AREAS ######### -->
+
+
+<div id="bodyarea">
+
+
+    <!-- This section will display a message if your show isn't
+    playing a scheduled playlist-->
+
+    <div {after-hours-message}>
+        <div class="after-hours">
+            Show Hours: <br />
+            <div style="font-size: 20px; font-family: 'Comfortaa', cursive;">
+                Show Starts November 25th <br />
+                Sun - Thurs | Sunset to 10 P.M. <br />
+                Fri - Sat | Sunset to 11 P.M.
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <!-- The section below will only display if your show is set for Jukebox mode, there
+    is no need to delete it if you are using the Voting mode, and you might change your
+    mind on the selection method later! -->
+
+    <!-- This section is used for the instructions that you want if you are using the Jukebox mode.
+    If you are using the voting mode, then it will not show.
+    Note that you can use the {QUEUE_SIZE} in your instructions, You shouldn't delete this if you are using the voting mode
+    because you might change your mind later.
+    Modify this to provide the instructions you want for your audience-->
+
+    <div class="body_text" id="instructional-text" {jukebox-dynamic-container}>
+        <H2>Jukebox Player</H2>
+        Select any song that you would like to hear from the list below.
+        Requests are limited to {QUEUE_DEPTH}
+        songs and will be played in the order that they are selected. <br />
+        <br />
+    </div>
+
+    <!-- This section is used for the instructions that you want if you are using the Voting mode.
+    If you are using the jukebox mode, then it will not show.
+    You shouldn't delete this if you are using the voting mode
+    because you might change your mind later.
+    Modify this to provide the instructions you want for your audience-->
+
+    <div class="body_text" id="instructional-text" {playlist-voting-dynamic-container}>
+        <H2>Voting is Open</H2>
+        Vote for your favorite song from the list below. Your vote will be added to the
+        song you choose. <br />
+        The song with the most votes will play
+        next!<br />
+        **Other voting info such as one vote per round or vote resets** <br />
+        <br />
+    </div>
+
+    <!-- *****************************************
+        The sections below are for the error messages, don't delete them!
+        ************************************* -->
+
+    <div id="requestSuccessful" style="display: none">
+        <div class="innerRequestSuccessful">
+            HO HO HO <br />
+            You're on the NICE LIST!
+        </div>
+    </div>
+
+    <div id="requestFailed" style="display: none">
+        <div class="failed_Info_Box">
+            RUDOLPH IS MISSIMG <br />
+            An unexpected error has occured!
+        </div>
+    </div>
+
+    <div id="requestPlaying" style="display: none">
+        <div class="failed_Info_Box">
+            GREAT TASTE <br />
+            The selected song is already requested!
+        </div>
+    </div>
+
+    <div id="queueFull" style="display: none">
+        <div class="failed_Info_Box">
+            SANTA'S LIST IS FULL <br />
+            We've reached the maximum of {QUEUE_DEPTH} requests
+        </div>
+    </div>
+
+    <div id="invalidLocation" style="display: none">
+        <div class="failed_Info_Box">
+            YOU'RE NOT FROM AROUND HERE <br />
+            Did you allow your location?
+        </div>
+    </div>
+
+    <div id="invalidLocationCode" style="display: none">
+        <div class="failed_Info_Box">
+            YOU'RE NOT FROM AROUND HERE <br />
+            Did you enter the location code correctly?
+        </div>
+    </div>
+
+    <div id="alreadyVoted" style="display: none">
+        <div class="failed_Info_Box">
+            DON'T BE A GRINCH <br />
+            You can only vote once per round.
+        </div>
+    </div>
+
+    <!-- end of error messages -->
+</div>
+
+<!-- ######### FOOTER #########-->
+<div {playlist-voting-dynamic-container}>
+    <div id="footer">
+        <div style="background: url('https://i.postimg.cc/3NgFJS1R/bulbs.png') repeat-x center top; background-size: auto 100%; height: 54px;"></div>
+        <!-- The section below will only display if your show is set for Voting mode, there
+        is no need to delete it if you are using the Jukebox mode, and you might change your
+        mind on the selection method later! -->
+        <br />
+
+        <div class="rtable">
+            <div class="cell-vote-playlist" style="font-family: 'Fredericka the Great', cursive;border: none; cursor: text">
+                <H2>Pick Below</H2>
+            </div>
+            <div class="cell-vote" style="font-family: 'Fredericka the Great', cursive;border: none; cursor: text">
+                <H2>Votes</H2>
+            </div>
+        </div>
+        <div class="rtable">
+            {PLAYLISTS}
+        </div>
+        <br />
+        <br />
+    </div>
+</div>
+<!-- The section below will only display if your show is set for Jukebox mode, there
+is no need to delete it if you are using the Voting mode, and you might change your
+mind on the selection method later! -->
+
+<div {playlist-standard-dynamic-container}>
+    <div id="footer">
+        <div style="background: url('https://i.postimg.cc/3NgFJS1R/bulbs.png') repeat-x center top; background-size: auto 100%; height: 54px;"></div>
+        <br />
+        <div id="playlists_container">
+            {PLAYLISTS}
+        </div>
+        <br />
+        <br />
+    </div>
+</div>
+
+<div id="header">
+    <br /> <div style="text-align: center; color: white; font-size: 1.2em; font-family: 'Rock Salt', cursive;">**Some show info if you want**</div> <br />
+    <a href="http://xlights.org/">XLights</a> | <a href="https://remotefalcon.com/">Remote Falcon</a> | <a href="https://www.pixelcontroller.com/">Falcon</a>
+    <br />
+    <br />
+</div>
+
+<!-- ######### SNOW #########-->
+<div class="snow" />
+<style>
+    .editor-stage .snow {
+        height:50px;
+        background: #fff;
+    }
+    .snow{
+        position:fixed;
+        pointer-events:none;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        height:100vh;
+        background: none;
+        background-image: url('https://i.postimg.cc/BjdCWj0c/s1.png'), url('https://i.postimg.cc/VrwB625J/s2.png'), url('https://i.postimg.cc/JyZ5RR7w/s3.png');
+        z-index:100;
+        -webkit-animation: snow 10s linear infinite;
+        -moz-animation: snow 10s linear infinite;
+        -ms-animation: snow 10s linear infinite;
+        animation: snow 10s linear infinite;
+    }
+    @keyframes snow {
+        0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+        50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+        100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+    }
+    @-moz-keyframes snow {
+        0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+        50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+        100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
+    }
+    @-webkit-keyframes snow {
+        0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+        50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+        100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+    }
+    @-ms-keyframes snow {
+        0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+        50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+        100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+    }
+</style>

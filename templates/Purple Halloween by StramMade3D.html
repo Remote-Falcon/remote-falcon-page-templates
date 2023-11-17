@@ -1,0 +1,690 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<!--
+   This HTML template was coded by Rick Harris. Page graphics and layout are designed by Tracy Stram at StramMade3d.com
+
+   Since this will be embedded in the page, there is no need to add any html or body tags.
+   Simply add and/or modify elements you want and they will be added.
+
+   The following are the variables used to populate your lists so DON'T MODIFY THESE!!:
+   {PLAYLISTS} - Displays the list of your sequences for the viewer to request.
+   {NOW_PLAYING} - Displays the currently playing sequence.
+   {NEXT_PLAYLIST} - Displays the next sequence in the queue.
+   {QUEUE_SIZE} - Displays the current number of songs in the queue when using Jukebox mode.
+   {QUEUE_DEPTH} - Displays the size that you have configured for your queue. This can be used in error messages or your instructions if you want.
+   {LOCATION_CODE} - Displays the input field used to capture the location code.
+   {JUKEBOX_QUEUE} - Displays the list of sequences currently in the jukebox queue.
+
+-->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.typekit.net/sni8lom.css">
+<style type="text/css">
+
+    /** If you want to use any images on your page, they will need to be hoste on a secure site like imgur.com **/
+
+    /*******************
+         BASE CONFIG
+    *******************/
+    {
+        box-sizing: border-box;
+        font-family: 'itc-benguiat-condensed';
+        color: greenyellow;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    /******
+      BODY
+    *******/
+    body {
+        background-image: url('https://i.imgur.com/BkGbkwR.png');
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        width: auto;
+        height: 100%;
+        min-height: 900px;
+        background-color: transparent;
+        position: relative;
+    }
+
+    /******
+      DIV
+    *******/
+    div {
+        font-size: 11px;
+        line-height: 1.5;
+        text-align: center;
+        color: white;
+    }
+
+    /****************
+       HEADER IMAGE
+    *****************/
+    #header_Img_Content {
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+    #your-logo {
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    /**************
+       BODY TEXT
+    ***************/
+    .body_text {
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        text-align: center;
+        font-size: 25px;
+        font-family: 'itc-benguiat-condensed';
+        font-weight: normal;
+    }
+
+    /******************
+        INSTRUCTIONS
+    ******************/
+    #instructional-text {
+        margin: auto;
+        width: 90%;
+        color: #ffffff;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+    }
+
+    /**************
+        FOOTER
+    **************/
+    #footer {
+        margin: auto;
+        width: 100%;
+        color: transparent;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    /********************
+        INTRO SECTION
+    ********************/
+    #intro {
+        margin: auto;
+        width: 100%;
+        color: darkorange;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        font-family: 'itc-benguiat-condensed';
+    }
+    #intro-text {
+        margin: auto;
+        width: 90%;
+        color: #ffffff;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+    }
+
+    /********************
+        SEPERATOR BAR
+    ********************/
+    hr.separator {
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+        height: 8px;
+        border: 0;
+        background-color: #F87B02;
+        padding: 0px;
+    }
+
+    /************************
+        LOCATION CODE TEXT
+    ************************/
+    #location_code_text {
+        margin: auto;
+        width: 90%;
+        color: orange;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+    }
+    /****************************
+        LOCATION CODE CONTAINER
+    ****************************/
+    #location_code_container {
+        margin: auto;
+        width: 100%;
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+    }
+
+    /************************
+        PLAYLISTS CONTAINER
+    ************************/
+    #playlists_container {
+        margin: auto;
+        width: 90%;
+        color: #ffffff;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+    }
+    #playlist-text {
+        margin: auto;
+        width: 90%;
+        color: #ffffff;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+    }
+
+    /*********************
+        SECTION TITLES - Titles to the different sections of the page
+    *********************/
+    .rf-titles{
+        border-bottom: 5px deeppink;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        color: white;
+        text-align: center;
+        font-size: 30px;
+    }
+    .white-title{
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        text-align: center;
+        font-size: 40px;
+        font-family: 'ccmonstermash';
+    }
+    .green-title{
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: greenyellow;
+        text-align: center;
+        font-size: 40px;
+        font-family: 'ccmonstermash';
+    }
+    .orange-title{
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: darkorange;
+        text-align: center;
+        font-size: 40px;
+        font-family: 'ccmonstermash';
+    }
+    .pink-title{
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: deeppink;
+        text-align: center;
+        font-size: 40px;
+        font-family: 'ccmonstermash';
+    }
+
+    .rf-header{
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: greenyellow;
+        text-align: center;
+        font-size: 25px;
+        font-family: 'ccmonstermash';
+    }
+
+    /******************
+        PLAYING NOW
+    ******************/
+    .playing-now{
+        margin-top: 10px;
+        color: white;
+        font-size: 20px;
+    }
+
+    /****************
+        R-TABLE
+    ****************/
+    .rtable{
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        text-align: center;
+        width: 90%;
+        padding: 0;
+    }
+
+    /**************************
+        VOTING MODE PLAYLIST
+    **************************/
+    .cell-vote-playlist{
+        flex-grow: 1;
+        width: 85%;
+        overflow: hidden;
+        list-style: none;
+        font-family: 'itc-benguiat-condensed';
+        font-size: 18px;
+        border: transparent;
+        border-width: 2px 2px 1px 2px;
+        cursor: pointer;
+    }
+
+    /*****************
+        VOTING MODE
+    *****************/
+    .cell-vote {
+        flex-grow: 1;
+        width: 15%;
+        overflow: hidden;
+        list-style: none;
+        font-size: 18px;
+        font-family: 'itc-benguiat-condensed';
+        border: transparent;
+        border-width: 2px 2px 1px 0px;
+
+    }
+    /***************************
+        JUKEBOX MODE PLAYLIST
+    ***************************/
+    .jukebox-list {
+        width: 100%;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        /**border-width: 2px 2px 1px 2px; **/
+        /**cursor:grabbing ; **/
+    }
+    /*******************
+        JUKEBOX QUEUE
+    ********************/
+    .jukebox-queue {
+        text-align: center;
+        font-family: 'itc-benguiat-condensed';
+        color: white;
+        font-size: 20px;
+    }
+
+    /***************
+        ALBUM ART
+    ***************/
+    .album-art {
+        height: 40px;
+        width: auto;
+        padding-right: 20px;
+    }
+
+    /*******************************
+        JUKEBOX QUEUE CONTAINER
+    *******************************/
+    .jukebox-queue-container {
+        overflow: auto;
+        height: 150px;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    /***********************
+        AFTER HOURS VIEW
+    ***********************/
+    .after-hours {
+        width: 100%;
+        font-size: 30px;
+        border: none;
+        margin: auto;
+        color: #ffffff;
+    }
+
+    /*************
+        BUTTONS
+    *************/
+    .button {
+        background-color: #D0021B;
+        border: none;
+        border-radius: 10px;
+        color: ffffff;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    #submit {
+        background-color: #d60000;
+        padding: 1em;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 20px;
+        text-decoration: none;
+        border: none;
+    }
+    #submit:hover {
+        border: none;
+        background: #e60000;
+        box-shadow: 0px 0px 1px #777;
+    }
+
+    /********************************
+        REQUEST SUCCESSFUL MESSAGE
+    ********************************/
+    .innerRequestSuccessful {
+        background-color: #009C00;
+        margin: auto;
+        width: 80%;
+        color: #ecf0f1;
+        text-align: center;
+        font-size: 24px;
+    }
+    /****************************
+        REQUEST FAILED MESSAGE
+    ****************************/
+    .failed_Info_Box {
+        background-color: #FF7400;
+        margin: auto;
+        width: 80%;
+        color: #ecf0f1;
+        text-align: center;
+        font-size: 24px;
+    }
+    /***********************
+        HYPERLINK COLORS
+    ************************/
+    a:link {
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+    }
+    a:visited {
+        color: deeppink;
+        background-color: transparent;
+        text-decoration: none;
+    }
+    a:hover {
+        color: mediumpurple;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+    a:active {
+        color: : black;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    .category-label {
+        font-size: 24px;
+        font-weight: bold;
+        margin: auto;
+        width: 80%;
+        padding-top: 10px;
+        color: white;
+    }
+
+    .category-section {
+        padding-bottom: 10px;
+    }
+
+</style>
+
+
+<!-----END OF STYLE OPTIONS----->
+
+<!-----START OF PAGE DESIGN----->
+
+<div id="header_img_content"> <img src="https://i.imgur.com/OGXK0w1.png" style="width:100%; height: auto; margin: auto;"> </div>
+
+<div id="your_logo"> <img src="https://i.imgur.com/FYlWAI1.png" style="width:10%; height:auto; margin:  auto; position:center ;"> </div>
+
+<br />
+
+<div class="white-title">
+    Your Show's Name <!--For example: StramMade Lights--><br />
+
+    <div id="intro"> Welcome To Our<br/>
+        2022 Light Show </div>
+
+    <div class="body_text" id="intro-text"> A description of your show and any other info you want to provide.<br/>
+        Some more info on your show.
+    </div>
+
+    <hr class="separator">
+
+    <!-- This section is what shows what is currently playing. Don't delete! -->
+
+
+
+    <!-- This section will be displayed if your show isn't playing a scheduled playlist-->
+
+    <div {after-hours-message}>
+        <img src="https://i.imgur.com/7p5kpMM.png" alt="off-air" style="max-width: 25%;height:auto;margin: auto;">
+        <div class="pink-title">
+            Show Hours</div>
+        <div class="body_text">
+            Sunday through Thursday from Sunset to 10:00 P.M.<br/>
+            Friday and Saturday from sunset to 11:00 P.M.
+        </div>
+    </div>
+
+    <!-- The section below will only display if your show is set for Jukebox mode, there
+    is no need to delete it if you are using the Voting mode, and you might change your
+    mind on the selection method later! -->
+
+    <div {jukebox-dynamic-container}>
+        <div class="pink-title">
+            Playing Now
+        </div>
+
+        <div class="playing-now">
+            {NOW_PLAYING}<br/>
+        </div>
+        <hr class="separator">
+        <p class="orange-title">Next Selection</p>
+        <div style="text-align: center; color: white; font-size: 20px;">
+            {NEXT_PLAYLIST}
+        </div>
+        <p class="green-title"># Selected Songs</p>
+        <div style="text-align: center; color: white;font-size: 20px;">
+            {QUEUE_SIZE}
+        </div>
+
+        <p class="pink-title">Current Queue</p>
+        <div style="text-align: center; color: white;font-size: 20px;">
+            <div class="jukebox-queue-container">
+                {JUKEBOX_QUEUE}
+            </div>
+            <hr class="separator">
+        </div>
+
+    </div>
+
+    <!-- This section is used for the instructions that you want if you are using the Jukebox mode.
+    If you are using the voting mode, then it will not show.
+    Note that you can use the {QUEUE_SIZE} in your instructions, You shouldn't delete this if you are using the voting mode
+    because you might change your mind later.
+    Modify this to provide the instructions you want for your audience-->
+
+    <!-- JUKEBOX MODE INSTRUCTIONS -->
+
+    <div class="body_text" id="instructional-text" {jukebox-dynamic-container}> <br />
+        <div class="orange-title"> Pick Your Favorite</div>
+        🎃 Requests are limited to {QUEUE_DEPTH}  songs 🎃 <br />
+        🎃 Select any song that you would like to hear from the list below 🎃<br />
+        🎃 Songs will be played in the order that they are selected 🎃 <br />
+        <hr class="separator">
+        <br />
+    </div>
+
+    <!-- VOTING MODE INSTRUCTIONS -->
+
+    <div class="body_text" id="instructional-text" {playlist-voting-dynamic-container}>
+        <div class="green-title">Vote For Your Favorite</div>
+        👻 Vote for your favorite song from the list below 👻 <br >
+        👻 Your vote will be added to the song you choose 👻 <br />
+        👻 The song with the most votes will play next 👻<br />
+        👻 You can only vote once per round 👻<br />
+        👻 Voting will reset when the song with the highest votes starts to play 👻 <br />
+        <hr class="separator">
+
+    </div>
+
+    <!--
+      This is the section for the location code for the viewer to enter, if you have
+      location code enabled. It appears twice here, once for jukebox and once for
+      voting.
+    -->
+    <div {location-code-dynamic-container}>
+        <div id="location_code_text">
+            Enter the code below to submit a request:
+        </div>
+        <div id="location_code_container">
+            {LOCATION_CODE}
+        </div>
+    </div>
+
+    <!-- The section below will only display if your show is set for Voting mode, there
+    is no need to delete it if you are using the Jukebox mode, and you might change your
+    mind on the selection method later! -->
+
+    <div {playlist-voting-dynamic-container}>
+        <div class="rtable">
+            <div class="cell-vote-playlist" style="border: none; cursor: text">
+                Song List
+            </div>
+            <div class="cell-vote" style="border: none; cursor: text">
+                Votes
+            </div>
+        </div>
+        <div class="rtable">
+            {PLAYLISTS}
+        </div><br />
+    </div>
+
+
+
+    <!-- The section below will only display if your show is set for Jukebox mode, there
+    is no need to delete it if you are using the Voting mode, and you might change your
+    mind on the selection method later! -->
+
+    <div {jukebox-dynamic-container}>
+        <div id="playlists_container">
+            {PLAYLISTS}
+        </div>
+    </div>
+    <!-- *****************************************
+        The sections below are for the error messages, don't delete them!
+        ************************************* -->
+
+    <div id="requestSuccessful" style="display: none">
+        <div class="innerRequestSuccessful">
+            Successfully Added!
+        </div>
+    </div>
+
+    <div id="requestFailed" style="display: none">
+        <div class="failed_Info_Box">
+            ERROR <br/>
+            An unexpected error has occurred! Sorry for the inconvenience.
+        </div>
+    </div>
+
+    <div id="requestPlaying" style="display: none">
+        <div class="failed_Info_Box">
+            SONG ALREADY REQUESTED <br/>
+            The selected song has already been requested.
+        </div>
+    </div>
+
+    <div id="queueFull" style="display: none">
+        <div class="failed_Info_Box">
+            QUEUE FULL<br/>
+            The queue is full. The maximum number of request is {QUEUE_DEPTH}
+        </div>
+    </div>
+
+    <div id="invalidLocation" style="display: none">
+        <div class="failed_Info_Box">
+            INVALID LOCATION <br/>
+            You are not located where the show is or didn't allow your location to be identified!
+        </div>
+    </div>
+
+    <div id="alreadyVoted" style="display: none">
+        <div class="failed_Info_Box">
+            ALREADY VOTED <br/>
+            You can only vote once per round, you will have to wait for the current song to finish before you can vote
+            again.
+        </div>
+    </div>
+
+    <div id="invalidLocationCode" style="display: none">
+        <div class="failed_Info_Box">
+            INVALID CODE <br/>
+            The code you entered is not correct!
+        </div>
+    </div>
+
+    <!-- end of error messages -->
+
+    <hr class="separator">
+
+    <div class="orange-title">
+        About our show</div>
+    <div id="instructional-text">
+        Enter whatever information you want like maybe details about your show or show times
+    </div>
+    <a href="https://remotefalcon.com" class="button">Visit Our
+        Website</a> <!-- change this to your website or delete if not needed -->
+
+    <div class="green-title"> <!-- modify or delete the links as needed -->
+        FOLLOW US</div>
+
+    <a style="display: inline-block;"
+       href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/PROFILE"
+       target="_blank"> <img style="border-radius: 3px; display: block;"
+                             src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/facebook.png"
+                             alt="" width="35" height="35"/> </a>
+    <a style="display: inline-block;" href="https://twitter.com/home?status=https://www.twitter.com/PROFILE"
+       target="_blank"> <img style="border-radius: 3px; display: block;"
+                             src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/twitter.png"
+                             alt="" width="35" height="35"/> </a>
+    <a style="display: inline-block;"
+       href="https://www.linkedin.com/shareArticle?mini=true&amp;url=[[SHORT_PERMALINK]]&amp;title=&amp;summary=&amp;source="
+       target="_blank"> <img style="border-radius: 3px; display: block;"
+                             src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/linkedin.png"
+                             alt="" width="35" height="35"/> </a>
+    <a style="display: inline-block;" href="[[SHORT_PERMALINK]]" target="_blank"> <img
+            style="border-radius: 3px; display: block;"
+            src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/instagram.png"
+            alt="" width="35" height="35"/> </a>
+</div>
+<div id="footer">
+    <img src="https://i.imgur.com/uj7gfcT.png" style="width:100%; height: auto; margin: auto;">
+</div>

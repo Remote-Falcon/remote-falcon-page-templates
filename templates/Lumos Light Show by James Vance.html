@@ -1,0 +1,652 @@
+<!--2.0--> <!-- do not delete or move this comment -->
+<!--
+   This HTML template has been provided by Rick Harris and contains everything you should need
+   to get started!
+
+   Since this will be embedded in the page, there is no need to add any html or body tags.
+   Simply add and/or modify elements you want and they will be added.
+
+   The following are the variables used to populate your lists so DON'T MODIFY THESE!!:
+   {PLAYLISTS} - Displays the list of your sequences for the viewer to request.
+   {NOW_PLAYING} - Displays the currently playing sequence.
+   {NEXT_PLAYLIST} - Displays the next sequence in the queue.
+   {QUEUE_SIZE} - Displays the current number of songs in the queue when using Jukebox mode.
+   {QUEUE_DEPTH} - Displays the size that you have configured for your queue. This can be used in error messages or your instructions if you want.
+   {VOTES} - Displays the number of votes for each playlist when in voting mode.
+
+   Feel free to modify this HTML page as much as you need. All I ask is that you follow this one simple rule...
+   Do NOT add ANY scripts or ANY reference to scripts. NONE! ZILCH! NADA!
+   Other than that, get creative with it!
+
+   This page is designed to make modifying the looks of your page somewhat straight forward.
+   The <style> section is where you will changes the properties to change the appearance of your page.
+   You can move the sections as you need
+-->
+
+<!--
+    The section between the <style type="text/css"> and </style> is used to customize your viewer page.
+    Do not delete any items in this section unless you know what they are doing.
+    This section is where you can custom design your webpage the way you want it by changing the values for the particular section.
+-->
+
+<head>
+    <title>Lumos Light Show</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+
+    /***************
+        Base Config-- This section defines the base configuration for your page, the font and font color
+    *******************/
+
+    * {
+        box-sizing: border-box;
+        font-family: "lora-regular", serif;
+        color: white;
+        text-align: center;
+    }
+
+    h2 {
+        color: #fbd125;
+    }
+
+    .h2-bold {
+        font-weight: bold;
+    }
+
+    /*******************************
+        The body section is for configuring the overall looks of the page such as the background color
+        and background image. If you want to use a background image
+        delete the comments and it is recommended to set a size to ensure if fits how you intend it.
+        If you want the image to tile to fill the whole page then set the background-repeat to repeat.
+    *******************************/
+
+    body {
+        background-color: #000000; /** sets the overall background color **/
+    }
+    .body-background {
+
+        background: url(https://lumoslightshow.com/images/LLS-Gradient-Background-v2.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        min-height: 786px;
+        background-color: transparent;
+        position: relative;
+        display: table;
+    }
+    .body-background .shadow-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .4;
+        background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+        background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+        background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#cc000000', GradientType=0);
+    }
+    .body-background .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .6;
+        background-color: transparent;
+    }
+    .body-content {
+        display: table-cell;
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        padding-bottom: 15.6rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /*******************************
+        The div section is for configuring looks of the div sections
+    *******************************/
+
+    div{
+        font-size: 11px;
+        line-height: 1.5;
+        text-align: center;
+        /** only needed if you want a different text color
+        color: #000000;
+        **/
+    }
+
+    /*******************************
+        The #header_Img_Content section is for configuring looks for that section
+    *******************************/
+
+    #header_Img_Content{
+        /** only needed if you want a different background color for that section
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 90%;
+        text-align: center;
+    }
+
+
+    /***************
+        the body text is the generic style for your normal text areas
+    *****************/
+
+    .body_text{
+        /** only needed if you want a different background color for all of the body text sections
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 90%;
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        padding-top: 2em;
+    }
+
+    /*************
+        The body_text will provide the format for all the text areas, but if you need more control
+        of that specific section, then you can configure it in this section
+    ****************/
+
+    /*********************
+        #instructional-text{
+            background-color: #000000;
+            margin: auto;
+            width: 90%;
+            color: #7e8c8d;
+            text-align: center;
+            font-size: 18px;
+        }
+    **********************/
+
+    /*****************
+        This will format the footer
+    **************************/
+
+    #footer{
+        background-color: #D0021B;
+        margin: auto;
+        width: 90%;
+        color: #ffffff;;
+        text-align: center;
+        font-size: 18px;
+    }
+
+
+    /*******************************
+        The #intro section is for configuring looks for that section
+    *******************************/
+
+    #intro{
+
+        /** only needed if you want a different background color for all of the body text sections
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 90%;
+        text-align: center;
+        font-size: 30px;
+    }
+
+    /*******************************
+        The hr.separator is used to configure the separator bar
+    *******************************/
+
+    hr.separator{
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+        height: 8px;
+        border: 0;
+        background-color: #fbd125;
+        padding: 0px;
+    }
+
+    /*******************************
+        The playlists-container is used to configure the section where the
+        list of your songs is shown
+    *******************************/
+
+    #playlists_container{
+        /** only needed if you want a different background color for this section
+        background-color: #000000;
+        **/
+        margin: auto;
+        width: 90%;
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: -2em;
+        margin-top: 2em
+    }
+
+    /*******************************
+        The rf-titles is used to configure the title above the RF imported data
+    *******************************/
+
+    .rf-titles{
+        /** only needed if you want a different background color for for this section
+        background-color: #000000;
+        **/
+        border-bottom: 5px solid #fbd125;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+        color: #fbd125;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        padding-top: 1em;
+    }
+
+    /*******************************
+        The playing-now class is used to configure the text that shows what is currently playing
+    *******************************/
+
+    .playing-now {
+        /*text-align: left; */
+        margin-top: 10px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /*******************************
+        The rtable is used to configure table where the rf lists will show
+        You shouldn't modify this
+    *******************************/
+
+    .rtable {
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        text-align: center;
+        width: 90%;
+        padding: 0;
+    }
+
+    /*******************************
+        The cell-vote-playlist is used to configure the table where the rf lists will show when you are using the voting mode
+        You shouldn't modify this with the exception of the font-size, border and cursor properties
+    *******************************/
+
+    .cell-vote-playlist {
+        flex-grow: 1;
+        width: 85%;
+        font-weight: bold;
+        overflow: hidden;
+        list-style: none;
+        font-size: 20px;
+        border: solid white;
+        border-width: 2px 2px 1px 2px;
+        cursor: pointer;
+    }
+
+    /*******************************
+        The cell-vote is used to configure the table where the rf lists will show when you are using the voting mode
+        You shouldn't modify this with the exception of the font-size, border and cursor properties
+    *******************************/
+
+    .cell-vote {
+        flex-grow: 1;
+        width: 15%;
+        font-weight: bold;
+        overflow: hidden;
+        list-style: none;
+        font-size: 20px;
+        border: solid white;
+        border-width: 2px 2px 1px 0px;
+
+    }
+
+    /*******************************
+        The jukebox-list is used to configure the table where the rf lists will show when you are using the jukebox mode
+        You shouldn't modify this with the exception of the font-size, border and cursor properties
+    *******************************/
+
+
+    .jukebox-list{
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        /**border-width: 2px 2px 1px 2px; **/
+        /**cursor:grabbing ; **/
+
+    }
+    /*******************************
+        The after-hours class is used to configure a message to be displayed when
+        you don't have a scheduled playlist playing
+    *******************************/
+
+    .after-hours{
+        width: 90%;
+        font-size: 32px;
+        border: none;
+        font-weight: bold;
+        margin: auto;
+        padding-top: 1em;
+        color: #fbd125;
+    }
+
+    /*******************************
+        The button is used to configure your buttons
+    *******************************/
+
+    .button{
+        background-color: #7F0909;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 4px 2px;
+        cursor: pointer;
+        margin-top: 2em;
+    }
+
+    #submit {
+        background-color: #d60000;
+        padding: 1em;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+        border: none;
+    }
+
+    #submit:hover {
+        border: none;
+        background: #e60000;
+        box-shadow: 0px 0px 1px #777;
+    }
+
+    /*******************************
+        The innerRequestSuccessful is used to configure the message for sucessful requests
+    *******************************/
+
+    .innerRequestSuccessful {
+        background-color: #009C00;
+        margin: auto;
+        width: 80%;
+        color: #ecf0f1;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    /*******************************
+        The failed_Info_Box is used to configure the message for unsucessful requests
+    *******************************/
+    .failed_Info_Box{
+        background-color: #ff1b1b;
+        margin: auto;
+        width: 80%;
+        color: #ecf0f1;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    .warning_Info_Box{
+        background-color: #7F0909;
+        margin: auto;
+        width: 80%;
+        color: #ecf0f1;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    .sequence-image {
+        height: 40px;
+        width: auto;
+        padding-right: 20px;
+    }
+
+    .jukebox-queue-container {
+        overflow: auto;
+        height: 150px;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .jukebox-queue {
+        text-align: center;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .category-label {
+        font-size: 24px;
+        font-weight: bold;
+        margin: auto;
+        width: 80%;
+        color: #fbd125;
+    }
+
+    .category-section {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+</style>
+
+<section class="body-background">
+    <div class="overlay"></div>
+    <div class="shadow-overlay"></div>
+    <div class="body-content">
+
+        <!-- if you want a picture in your header, you will have to store it on a secure server or it
+        might not display correctly
+        -->
+
+        <div id="header_Img_Content">
+            <img src="https://lumoslightshow.com/images/LLS-Logo-2023-rounded.png" style="max-width: 70%;height:auto;margin: auto;">
+        </div>
+
+        <!-- This section will display a message if your show isn't
+        playing a scheduled playlist-->
+
+        <div style="padding-top:5em">
+            <h1>
+                And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people.
+                </br>
+                For unto you is born this day in the city of David a Saviour, which is Christ the Lord.
+                </br>
+                Luke 2:10-11
+            </h1>
+        </div>
+
+        <div {after-hours-message}>
+            <div class="after-hours">
+                Show runs from 5:30 p.m. to 10 p.m. nightly.
+                </br>
+                All requests will be cleared at 10 p.m.
+            </div>
+        </div>
+
+
+        <!-- The section below will only display if your show is set for Jukebox mode, there
+        is no need to delete it if you are using the Voting mode, and you might change your
+        mind on the selection method later! -->
+
+        <div {jukebox-dynamic-container}>
+            <div class="rf-titles">
+                What's Playing
+            </div>
+
+            <div class="playing-now">
+                {NOW_PLAYING}
+            </div>
+            <div class="rf-titles">
+                What's Next
+            </div>
+            <div class="playing-now">
+                {NEXT_PLAYLIST}
+            </div>
+            <div class="rf-titles">
+                What's In the Queue
+            </div>
+            <div class="jukebox-queue-container">
+                <div class="jukebox-queue">
+                    {JUKEBOX_QUEUE}
+                </div>
+            </div>
+        </div>
+
+        <div {playlist-voting-dynamic-container}>
+            <div class="rf-titles">
+                What's Playing
+            </div>
+
+            <div class="playing-now" style="padding-bottom: 5em;">
+                {NOW_PLAYING}
+            </div>
+        </div>
+
+        <!-- This section is used for the instructions that you want if you are using the Jukebox mode.
+        If you are using the voting mode, then it will not show.
+        Note that you can use the {QUEUE_SIZE} in your instructions, You shouldn't delete this if you are using the voting mode
+        because you might change your mind later.
+        Modify this to provide the instructions you want for your audience-->
+
+        <div class="body_text" id="instructional-text" {jukebox-dynamic-container}>
+            <div class="rf-titles">What would you like to see?</div>
+        </div>
+
+        <!-- The section below will only display if your show is set for Jukebox mode, there
+        is no need to delete it if you are using the Voting mode, and you might change your
+        mind on the selection method later! -->
+
+        <div {playlist-standard-dynamic-container}>
+            <div id="playlists_container">
+                {PLAYLISTS}
+            </div>
+        </div>
+
+        <!-- This section is used for the instructions that you want if you are using the Voting mode.
+        If you are using the jukebox mode, then it will not show.
+        You shouldn't delete this if you are using the voting mode
+        because you might change your mind later.
+        Modify this to provide the instructions you want for your audience-->
+
+        <div style="padding-bottom:3em" class="body_text" id="instructional-text" {playlist-voting-dynamic-container}>
+            <div class="rf-titles" style="margin-top: -3em;">Vote for what would you like to see next!</div>
+        </div>
+
+        <!-- The section below will only display if your show is set for Voting mode, there
+       is no need to delete it if you are using the Jukebox mode, and you might change your
+       mind on the selection method later!  -->
+
+        <div {playlist-voting-dynamic-container}>
+            <div class="rtable">
+                <div class="cell-vote-playlist" style="border: none; cursor: text">
+                    Song List
+                </div>
+                <div class="cell-vote" style="border: none; cursor: text">
+                    Votes
+                </div>
+            </div>
+            <div class="rtable">
+                {PLAYLISTS}
+            </div>
+        </div>
+
+        <!-- *****************************************
+            The sections below are for the error messages, don't delete them!
+            ************************************* -->
+
+        <div id="requestSuccessful" style="display: none">
+            <div class="innerRequestSuccessful">
+                Request submitted!
+            </div>
+        </div>
+
+        <div id="requestFailed" style="display: none">
+            <div class="failed_Info_Box">
+                Uh Oh! <br />
+                Something bad happened...
+            </div>
+        </div>
+
+        <div id="requestPlaying" style="display: none">
+            <div class="warning_Info_Box">
+                The song you selected is already in the queue.
+            </div>
+        </div>
+
+        <div id="queueFull" style="display: none">
+            <div class="warning_Info_Box">
+                The queue is currently full. The maximum number of request is {QUEUE_DEPTH}.
+            </div>
+        </div>
+
+        <div id="invalidLocation" style="display: none">
+            <div class="warning_Info_Box">
+                You are not located where the show is or didn't allow your location to be identified.
+            </div>
+        </div>
+
+        <div id="alreadyVoted" style="display: none">
+            <div class="warning_Info_Box">
+                You can only vote once per round, you will have to wait for the current song to finish before you can vote again.
+            </div>
+        </div>
+
+        <!-- end of error messages -->
+
+        <hr class="separator">
+
+
+        <div class="body_text" id="social_links"> <!-- modify or delete the links as needed -->
+            <h4>Follow Lumos Light Show on:</h4>
+
+            <a style="display: inline-block; padding: 0px 10px 0px 10px" href="https://www.facebook.com/lumoslightshow" target="_blank">
+                <i class="fa fa-facebook" style="font-size:38px"></i>
+            </a>
+            <a style="display: inline-block; padding: 0px 10px 0px 10px" href="https://www.youtube.com/channel/UCnOWXE9VbyKzsT4eqtp0mUA" target="_blank">
+                <i class="fa fa-youtube" style="font-size:38px"></i>
+            </a>
+            <a style="display: inline-block; padding: 0px 10px 0px 10px" href="https://lumoslightshow.com" target="_blank">
+                <i class="fa fa-globe" style="font-size:38px"></i>
+            </a>
+        </div>
+    </div>
+</section>
