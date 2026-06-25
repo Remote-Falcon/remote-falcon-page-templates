@@ -574,6 +574,9 @@
     mind on the selection method later! -->
 
     <div {playlist-voting-dynamic-container}>
+        <!-- Shows "X of N votes left this show" when a per-voter vote limit is set
+        (Remote Falcon #162). Renders nothing when no limit is configured. -->
+        <div class="body_text" id="votes-remaining" style="text-align: center; margin: 0 0 12px;">{VOTES_REMAINING}</div>
         <div class="rtable">
             <div class="cell-vote-playlist" style="border: none; cursor: text">
                 Song List
