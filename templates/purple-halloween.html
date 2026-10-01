@@ -328,15 +328,28 @@
         font-family: 'itc-benguiat-condensed';
         color: white;
         font-size: 20px;
+        margin-bottom: 14px; /** space between songs in the queue **/
+    }
+
+    /*******************************************************
+        ARTIST NAME
+        Song list and queue. The global div rule above pins
+        every div at 11px, so the artist needs its own size.
+        Use .jukebox-queue .jukebox-list-artist to size the
+        queue artist on its own.
+    *******************************************************/
+    .jukebox-list-artist {
+        font-size: 14px;
     }
 
     /***************
         ALBUM ART
     ***************/
-    .album-art {
+    .sequence-image {
         height: 40px;
         width: auto;
         padding-right: 20px;
+        vertical-align: middle;
     }
 
     /*******************************
