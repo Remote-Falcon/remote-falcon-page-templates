@@ -1,726 +1,818 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
-<!--
-   This HTML template was coded by Rick Harris. Page graphics and layout are designed by Tracy Stram at StramMade3d.com
-
-   Since this will be embedded in the page, there is no need to add any html or body tags.
-   Simply add and/or modify elements you want and they will be added.
-
-   The following are the variables used to populate your lists so DON'T MODIFY THESE!!:
-   {PLAYLISTS} - Displays the list of your sequences for the viewer to request.
-   {NOW_PLAYING} - Displays the currently playing sequence.
-   {NEXT_PLAYLIST} - Displays the next sequence in the queue.
-   {QUEUE_SIZE} - Displays the current number of songs in the queue when using Jukebox mode.
-   {QUEUE_DEPTH} - Displays the size that you have configured for your queue. This can be used in error messages or your instructions if you want.
-   {LOCATION_CODE} - Displays the input field used to capture the location code.
-   {JUKEBOX_QUEUE} - Displays the list of sequences currently in the jukebox queue.
-
--->
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://use.typekit.net/sni8lom.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+<!-- External Fonts and Icons -->
+<link rel="stylesheet" href="https://use.typekit.net/wys0bqv.css">
+<link rel="stylesheet" href="https://use.typekit.net/sgn4nav.css">
+<link rel="stylesheet" href="https://use.typekit.net/wdk7mdz.css">
+<link rel="stylesheet" href="https://use.typekit.net/cnu0bcr.css">
+<link rel="stylesheet" href="https://use.typekit.net/wnw7euo.css">
+ 
+<title>Purple Halloween Template for Remote Falcon</title>
+ 
+<!-- CSS Styles -->
 <style type="text/css">
-
-    /** If you want to use any images on your page, they will need to be hoste on a secure site like imgur.com **/
-
-    /*******************
-         BASE CONFIG
-    *******************/
-    {
-        box-sizing: border-box;
-        font-family: 'itc-benguiat-condensed';
-        color: greenyellow;
-        text-align: center;
-        font-size: 25px;
-    }
-
-    /******
-      BODY
-    *******/
-    body {
-        background-image: url('https://remote-falcon-uploads.nyc3.cdn.digitaloceanspaces.com/__global__/purple_halloween_background.png');
-        background-repeat: no-repeat;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        width: auto;
-        height: 100%;
-        min-height: 900px;
-        background-color: transparent;
-        position: relative;
-    }
-
-    /******
-      DIV
-    *******/
-    div {
-        font-size: 11px;
-        line-height: 1.5;
-        text-align: center;
-        color: white;
-    }
-
-    /****************
-       HEADER IMAGE
-    *****************/
-    #header_Img_Content {
-        margin: auto;
-        width: 100%;
-        text-align: center;
-    }
-    #your-logo {
-        margin: auto;
-        width: 100%;
-        text-align: center;
-    }
+<!--
+ 
+/**  BASE CONFIG **/
+* {
+box-sizing: border-box;
+font-family: 'poppins'; 
+}
+ 
+body {
+background-color: #4e2a7d;
+color: white;
+font-size: 15px;
+background-position: 50%;
+background-repeat: no-repeat;
+background-size: cover;
+background-attachment: fixed;
+}
 
 
-    /**************
-       BODY TEXT
-    ***************/
-    .body_text {
-        box-sizing: border-box;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: white;
-        text-align: center;
-        font-size: 25px;
-        font-family: 'itc-benguiat-condensed';
-        font-weight: normal;
-    }
 
-    /******************
-        INSTRUCTIONS
-    ******************/
-    #instructional-text {
-        margin: auto;
-        width: 90%;
-        color: #ffffff;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-    }
 
-    /**************
-        FOOTER
-    **************/
-    #footer {
-        margin: auto;
-        width: 100%;
-        color: transparent;
-        text-align: center;
-        font-size: 18px;
-    }
+/* Desktop and large tablet screen settings */
+@media screen and (min-width: 992px) {
+body {
+background-position: 50%;
+background-repeat: repeat-y;
+color: black;}
+.img {
+max-width: 30%; }
 
-    /********************
-        INTRO SECTION
-    ********************/
-    #intro {
-        margin: auto;
-        width: 100%;
-        color: darkorange;
-        text-align: center;
-        font-size: 25px;
-        font-weight: bold;
-        font-family: 'itc-benguiat-condensed';
-    }
-    #intro-text {
-        margin: auto;
-        width: 90%;
-        color: #ffffff;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-    }
 
-    /********************
-        SEPERATOR BAR
-    ********************/
-    hr.separator {
-        border-radius: 5px;
-        margin-top: 10px;
-        margin-right: auto;
-        margin-left: auto;
-        width: 90%;
-        height: 8px;
-        border: 0;
-        background-color: #F87B02;
-        padding: 0px;
-    }
+.now-playing-image,
+.pick-fav-image,
+.separator-image,
+.logo-image{
+max-width: 200px;}
+}
+.sequence-image {
+width: 75px;
+}
+.follow-us a img {
+width: 50px;
+}
+ 
+@media screen and (max-width: 768px)
+.show-title,
+.playing-now-title,
+.jukebox-title {
+font-size: 1.5em;}
+.jukebox_table {
+font-size: 20px;
+font-weight: normal;
+text-align: center;
+display: flex;
+flex-wrap: wrap;
+grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+justify-content: center;
+gap: 20px;
+padding: 10px;
+margin: auto; 
+overflow-x: auto;
+}
+.jukebox-queue-container{
+width: 100px;
+}
+.sequence-image {
+width: 75px;
+}
+.follow-us a img {
+width: 50px;
+}
+ 
+@media screen and (max-width: 480px) {
+.jukebox-queue-container {
+width: 100%;}
+.jukebox-song-list {
+font-size: 1em;}
+}
+.follow-us a img {
+width: 50px;
+}
+.sequence-image {
+max-width: 75px;}
+ 
+img {
+max-width: 60%;
+height: auto;
+margin: auto;
+}
+ 
+div {
+font-size: 10px;
+text-align: center;
+line-height: 1;
+} 
+ 
+/** HEADER SECTION  **/
+#header_img_content,
+#your-logo {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+margin: auto;
+text-align: center;
+max-width: 100%;
+}
+ 
+.logo-container {
+margin-top: 0px;
+margin-bottom: 0px;
+}
+ 
+.logo-image {
+width: 30%;
+}
+ 
+@media only screen and (max-width: 768px) {
+.logo-image {
+width: 90%;}
+} 
+ 
+ 
+/** TEXT AND TITLES **/
+.show-title {
+font-family: 'shlop';
+color: white;
+font-size: 40px;
+margin: 0px auto 0px;
+line-height: 20px;
+}
+ 
+#intro {
+font-family: 'peachy-keen-jf';
+color: darkorange;
+font-size: 20px;
+font-weight: bold;
+text-align: center;
+line-height: 1.2;
+margin: 0px auto 0px;
+}
+ 
+#intro-text {
+font-family: 'itc-benguiat-condensed';
+color: white;
+font-size: 16px;
+text-align: center;
+line-height: 1;
+margin: 10px auto 10px;
+width: 90%;
+}
+ 
+.show-hours-title {
+font-family: 'shlop';
+color: greenyellow;
+font-size: 40px;
+text-align: center;
+line-height: 1.2;
+margin-top: 0px;
+margin: 0px auto 5px;
+}
+ 
+.show-hours-text {
+text-align: center;
+margin: 20px;
+}
+ 
+.hours-text {
+font-family: 'itc-benguiat-condensed';
+color: white;
+font-size: 18px;
+font-weight: normal;
+text-align: center;
+font-size: 15px;
+line-height: 1.5;
+margin: 0px auto 5px;
+}
 
-    /************************
-        LOCATION CODE TEXT
-    ************************/
-    #location_code_text {
-        margin: auto;
-        width: 90%;
-        color: orange;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-    }
-    /****************************
-        LOCATION CODE CONTAINER
-    ****************************/
-    #location_code_container {
-        margin: auto;
-        width: 100%;
-        color: white;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-    }
 
-    /************************
-        PLAYLISTS CONTAINER
-    ************************/
-    #playlists_container {
-        margin: auto;
-        width: 90%;
-        color: #ffffff;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-    }
-    #playlist-text {
-        margin: auto;
-        width: 90%;
-        color: #ffffff;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-    }
+ 
+.playing-now-title{
+font-family: ccmonstermash;
+color: darkorange;
+font-size: 40px;
+margin: 0px auto 0px;
+}
 
-    /*********************
-        SECTION TITLES - Titles to the different sections of the page
-    *********************/
-    .rf-titles{
-        border-bottom: 5px deeppink;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-        color: white;
-        text-align: center;
-        font-size: 30px;
-    }
-    .white-title{
-        box-sizing: border-box;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: white;
-        text-align: center;
-        font-size: 40px;
-        font-family: 'ccmonstermash';
-    }
-    .green-title{
-        box-sizing: border-box;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: greenyellow;
-        text-align: center;
-        font-size: 40px;
-        font-family: 'ccmonstermash';
-    }
-    .orange-title{
-        box-sizing: border-box;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: darkorange;
-        text-align: center;
-        font-size: 40px;
-        font-family: 'ccmonstermash';
-    }
-    .pink-title{
-        box-sizing: border-box;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: deeppink;
-        text-align: center;
-        font-size: 40px;
-        font-family: 'ccmonstermash';
-    }
 
-    .rf-header{
-        box-sizing: border-box;
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: greenyellow;
-        text-align: center;
-        font-size: 25px;
-        font-family: 'ccmonstermash';
-    }
+.playing-now-text .sequence-image{
+font-family: 'itc-benguiat-condensed';
+color: white;
+font-size: 20px;
+font-weight: normal;
+text-align: center;
+margin: 0px auto 0px;
+line-height: .5;
+height: 30%;
+width: auto;
+padding-right: 10px;
+vertical-align: middle;
+}
+ 
+#instructional-text {
+font-family: 'itc-benguiat-condensed';
+color: white;
+font-size: 14px;
+text-align: center;
+margin: 0px auto -10px;
+}
+ 
+#playlist-text {
+font-family: 'poppins';
+color: white;
+font-size: 18px;
+text-align: center;
+margin: 0px auto 0px;
+width: 90%;
+} 
+ 
+/**  SONG CATEGORIES  **/
+.category-label {
+font-family: 'itc-benguiat-condensed';
+color: white;
+background-color: darkorange;
+font-size: 16px;
+font-weight: bold;
+text-decoration: underline;
+text-align: center;
+padding: 10px;
+border-radius: 5px;
+cursor: pointer;
+display: block;
+margin: 5px 0px; 
+/***Use these attribute if using VOTING MODE with categories
+margin: auto;
+width: 100%;
+display: block;
+and delete the bolded attributes from above***/
+} 
+ 
+.category-section {
+padding-top: 2em;
+padding-bottom: 2em;
+display: block;
+/***Use these attribute if using VOTING MODE with categories
+cursor: pointer;
+display: block;
+border-radius: 5px;
+display: block;
+margin: 2px 0;
+and delete the bolded attributes from above***/
+} 
+ 
+.category-section:hover.jukebox-list {
+display: block;
+}
+ 
+.category-label:hover {
+background-color: greenyellow;
+color: black;
+}
+ 
+ 
+/** JUKEBOX MODE  **/
+.jukebox-title{
+font-family: shlop;
+color: greenyellow;
+font-size: 30px;
+margin: 0px auto 10px;
+}
+ 
+.jukebox-queue-song-name{
+font-family: itc-benguiat-condensed;
+color: white;
+font-size: 14px;
+text-align: center;
+line-height: 1.5;
+margin: 5px auto;
+width: 90%;
+}
 
-    /******************
-        PLAYING NOW
-    ******************/
-    .playing-now{
-        margin-top: 10px;
-        color: white;
-        font-size: 20px;
-    }
 
-    /****************
-        R-TABLE
-    ****************/
-    .rtable{
-        display: flex;
-        flex-wrap: wrap;
-        margin: auto;
-        text-align: center;
-        width: 90%;
-        padding: 0;
-    }
+.jukebox_table {
+font-family: 'poppins';
+color: white;
+font-size: 14px;
+font-weight: normal;
+text-align: center;
+display: flex;  
+flex-wrap: wrap;  
+justify-items: center;
+gap: 10px;
+padding: 10px;
+margin: auto;
+overflow-x: auto;
+}
+ 
+.jukebox-song-list {
+font-family: shlop;
+color: deeppink;
+font-size: 40px;
+text-align: center;
+margin: auto;
+}
+ 
+.jukebox-list {
+font-size: 20px;
+text-align: center;
+color: white;
+font-weight: bold;
+border: none;  
+width: 100%;  
+cursor: pointer;  
+margin: 0px auto 0px;  
+}
 
-    /**************************
-        VOTING MODE PLAYLIST
-    **************************/
-    .cell-vote-playlist{
-        flex-grow: 1;
-        width: 85%;
-        overflow: hidden;
-        list-style: none;
-        font-family: 'itc-benguiat-condensed';
-        font-size: 18px;
-        border: transparent;
-        border-width: 2px 2px 1px 2px;
-        cursor: pointer;
-    }
 
-    /*****************
-        VOTING MODE
-    *****************/
-    .cell-vote {
-        flex-grow: 1;
-        width: 15%;
-        overflow: hidden;
-        list-style: none;
-        font-size: 18px;
-        font-family: 'itc-benguiat-condensed';
-        border: transparent;
-        border-width: 2px 2px 1px 0px;
+.jukebox-list-artist {
+color: white;
+font-size: 16px;
+text-align: center;
+font-weight: normal;
+margin: 5px auto 0px;
+}
+  
+.jukebox-queue-container {
+overflow: auto;
+height: 150px;
+width: 70%;
+margin: 0 auto;
+}
+ 
+.jukebox-container {
+font-family: itc-benguiat-condensed;
+color: white;
+font-size: 20px;
+text-align: center;
+line-height: 1;
+width: 100%;
+overflow-x: hidden;
+max-width: 100%;
+margin: 5px auto -30px; 
+}
+ 
+.next-song .sequence-image,{
+height: 30%;
+width: auto;
+padding-right: 10px;
+vertical-align: middle;
+}
 
-    }
-    /***************************
-        JUKEBOX MODE PLAYLIST
-    ***************************/
-    .jukebox-list {
-        width: 100%;
-        font-size: 24px;
-        border: none;
-        cursor: pointer;
-        /**border-width: 2px 2px 1px 2px; **/
-        /**cursor:grabbing ; **/
-    }
-    /*******************
-        JUKEBOX QUEUE
-    ********************/
-    .jukebox-queue {
-        text-align: center;
-        font-family: 'itc-benguiat-condensed';
-        color: white;
-        font-size: 20px;
-        margin-bottom: 14px; /** space between songs in the queue **/
-    }
 
-    /*******************************************************
-        ARTIST NAME
-        Song list and queue. The global div rule above pins
-        every div at 11px, so the artist needs its own size.
-        Use .jukebox-queue .jukebox-list-artist to size the
-        queue artist on its own.
-    *******************************************************/
-    .jukebox-list-artist {
-        font-size: 14px;
-    }
+.jukebox-queue .sequence-image {
+height: 30%;
+width: auto;
+padding-right: 10px;
+vertical-align: middle;
+}
+ 
+/**  VOTING MODE  **/
+#voting-text{
+font-family: 'itc-benguiat-condensed';
+font-size: 14px;
+color: white;
+text-align: center;
+line-height: 1.5;
+width: 90%;
+margin: 0px auto 0px;
+}
+ 
+.voting_table {
+font-family: 'itc-benguiat-condensed';
+color: white;
+font-size: 10px;
+text-align: left;
+display: flex;
+flex-wrap: wrap;
+margin: auto;
+width: 90%;
+padding: 0;
+/***Delete the bolded border attributes below if you have song categories***/
+border: solid white;  /***Change to transparent for no grid lines ***/
+border-width: 2px 2px 1px 2px;
+}
+ 
+.songlist_column {
+font-family: 'shlop';
+color: greenyellow;
+font-size: 25px;
+font-weight: bold;
+text-align: left;
+display: grid;
+grid-template-columns: 85% 15%;
+align-items: center;
+margin: auto;
+width: 90%;
+padding: 10px;
+}
+ 
+.vote_column {
+font-family: shlop;
+color: greenyellow;
+font-size: 25px;
+font-weight: bold;
+text-align: center;
+}
+ 
+.cell-vote-playlist {
+font-family: 'poppins';
+color: white;
+font-size: 20px;
+text-align: left;
+display: flex;
+flex-direction: column;
+border: solid white;  /*** Change to transparent for no grid lines ***/
+border-width: 0px 0px 1px 0px; /*** Change to 1px 0px 0px 0px if using song categories***/
+cursor: pointer;
+width: 85%;
+overflow: hidden;
+}
+ 
+.cell-vote-playlist-artist {
+font-family: 'poppins';
+color: white;
+font-size: 10px;
+text-align: left;
+display: flex;
+margin: 5px 5px 8px 5px;
+}
+ 
+.cell-vote {
+font-family: 'poppins';
+font-size: 20px;
+color: white;
+display: flex; 
+justify-content: center; 
+align-items: center; 
+width: 15%; 
+border: solid white;  /*** Change to transparent for no grid lines ***/
+border-width: 0px 0px 1px 0px; /*** Change to 1px 0px 0px 0px if using categories***/
+overflow: hidden; 
+}
+ 
+ 
+/**  ALBUM ART & IMAGES  **/
+.sequence-image {
+width: 30%;
+height: auto; 
+margin: 10px auto 5px; /*** Change to 5px 5px 8px 5px using Voting Mode***/
+/***Delete the bolded border attributes below if using Voting Mode ***/
+display: block; justify-items: center;
+}
+ 
+.separator-image {
+max-width: 60%;
+height: 5px;
+margin: 0 auto 5px;
+display: block;
+}
 
-    /***************
-        ALBUM ART
-    ***************/
-    .sequence-image {
-        height: 40px;
-        width: auto;
-        padding-right: 20px;
-        vertical-align: middle;
-    }
 
-    /*******************************
-        JUKEBOX QUEUE CONTAINER
-    *******************************/
-    .jukebox-queue-container {
-        overflow: auto;
-        height: 150px;
-        width: 70%;
-        margin: 0 auto;
-    }
 
-    /***********************
-        AFTER HOURS VIEW
-    ***********************/
-    .after-hours {
-        width: 100%;
-        font-size: 30px;
-        border: none;
-        margin: auto;
-        color: #ffffff;
-    }
 
-    /*************
-        BUTTONS
-    *************/
-    .button {
-        background-color: #D0021B;
-        border: none;
-        border-radius: 10px;
-        color: ffffff;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 24px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-    #submit {
-        background-color: #d60000;
-        padding: 1em;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        border-radius: 6px;
-        color: #ffffff;
-        font-size: 20px;
-        text-decoration: none;
-        border: none;
-    }
-    #submit:hover {
-        border: none;
-        background: #e60000;
-        box-shadow: 0px 0px 1px #777;
-    }
+ 
+ 
+/** LOCATION CODE ITEMS  **/
+#location_code_text {
+font-family: 'mr-eaves-sans';
+color: black;
+font-size: 30px;
+text-align: center;
+margin-top: auto;
+}
+ 
+#location_code_container {
+font-family: 'montserrat';
+font-size: 20px;
+color: white;
+text-align: center;
+margin: auto;
+width: 90%;
+}
+ 
 
-    /********************************
-        REQUEST SUCCESSFUL MESSAGE
-    ********************************/
-    .innerRequestSuccessful {
-        background-color: #009C00;
-        margin: auto;
-        width: 80%;
-        color: #ecf0f1;
-        text-align: center;
-        font-size: 24px;
-    }
-    /****************************
-        REQUEST FAILED MESSAGE
-    ****************************/
-    .failed_Info_Box {
-        background-color: #FF7400;
-        margin: auto;
-        width: 80%;
-        color: #ecf0f1;
-        text-align: center;
-        font-size: 24px;
-    }
-    /***********************
-        HYPERLINK COLORS
-    ************************/
-    a:link {
-        color: black;
-        background-color: transparent;
-        text-decoration: none;
-    }
-    a:visited {
-        color: deeppink;
-        background-color: transparent;
-        text-decoration: none;
-    }
-    a:hover {
-        color: mediumpurple;
-        background-color: transparent;
-        text-decoration: underline;
-    }
-    a:active {
-        color: : black;
-        background-color: transparent;
-        text-decoration: underline;
-    }
 
-    .category-label {
-        font-size: 24px;
-        font-weight: bold;
-        margin: auto;
-        width: 80%;
-        padding-top: 10px;
-        color: white;
-    }
+/**  FOOTER  **/
 
-    .category-section {
-        padding-bottom: 10px;
-    }
+
+.footer-title,.about-show{
+font-family: 'ccmonstermash';
+color: darkorange;
+font-size: 30px;
+text-align: center;
+margin: 10px auto 10px;
+}
+ 
+.visit-site {
+font-family: peachy-keen-jf;
+color: white;
+font-size: 22px;
+font-weight: bold;
+text-align: center;
+margin: 10px auto 10px;
+}
+ 
+#footer_img_content{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+margin: 0px auto -30px;
+text-align: center;
+max-width: 100%;
+}
+ 
+ 
+/** SOCIAL MEDIA ICONS  **/
+
+
+.follow-us {
+text-align: center;
+margin-top: 20px;
+bottom: 0;
+width: 100%;
+padding: 10px 0;
+}
+ 
+.follow-us a {
+text-decoration: none;
+color: inherit;
+}
+ 
+.follow-us a img {
+width: 30px;
+height: auto;
+margin: 5px;
+border-radius: 5px;
+transition: transform 0.3s ease;
+}
+ 
+.follow-us a img:hover {
+transform: scale(1.1);
+}
+ 
+ 
+/** ERRORS MESSAGES  **/
+
+
+.innerRequestSuccessful {
+font-family: 'poppins';
+font-size: 24px;
+font-weight: bold;
+color: black;
+text-align: center;
+height: fit-content;
+position: fixed;
+left: 0px;
+right: 0px;
+top: 20%;
+width: 80%;
+margin: auto;
+margin-inline: auto;
+cursor: pointer;
+padding: 25px;
+border-radius: 15px;
+background-color: lawngreen;
+}
+ 
+.failed_Info_error {
+font-family: 'poppins';
+font-size: 24px;
+font-weight: bold;
+color: white;
+text-align: center;
+height: fit-content;
+position: fixed;
+left: 0px;
+right: 0px;
+top: 20%;
+width: 80%;
+margin: auto;
+margin-inline: auto;
+cursor: pointer;
+padding: 25px;
+border-radius: 15px;
+background-color: orangered;
+}
+ 
+.failed_Info_message {
+font-family: 'poppins';
+font-size: 20px;
+color: white;
+text-align: center;
+height: fit-content;
+position: fixed;
+left: 0px;
+right: 0px;
+top: 20%;
+width: 80%;
+margin: auto;
+margin-inline: auto;
+cursor: pointer;
+padding: 25px;
+border-radius: 15px;
+background-color: orangered;}
+
+
+
+
+
 
 </style>
+</head>
 
 
-<!-----END OF STYLE OPTIONS----->
-
-<!-----START OF PAGE DESIGN----->
-
-<div id="header_img_content"> <img src="https://remote-falcon-uploads.nyc3.cdn.digitaloceanspaces.com/__global__/purple_halloween_header.png" style="width:100%; height: auto; margin: auto;"> </div>
-
-<div id="your_logo"> <img src="https://remote-falcon-uploads.nyc3.cdn.digitaloceanspaces.com/__global__/purple_halloween_your_logo.png" style="width:10%; height:auto; margin:  auto; position:center ;"> </div>
-
-<br />
-
-<div class="white-title">
-    Your Show's Name <!--For example: StramMade Lights--><br />
-
-    <div id="intro"> Welcome To Our<br/>
-        2022 Light Show </div>
-
-    <div class="body_text" id="intro-text"> A description of your show and any other info you want to provide.<br/>
-        Some more info on your show.
-    </div>
-
-    <hr class="separator">
-
-    <!-- This section is what shows what is currently playing. Don't delete! -->
-
-
-
-    <!-- This section will be displayed if your show isn't playing a scheduled playlist-->
-
-    <div {after-hours-message}>
-        <img src="https://remote-falcon-uploads.nyc3.cdn.digitaloceanspaces.com/__global__/purple_halloween_see_you_soon.png" alt="off-air" style="max-width: 25%;height:auto;margin: auto;">
-        <div class="pink-title">
-            Show Hours</div>
-        <div class="body_text">
-            Sunday through Thursday from Sunset to 10:00 P.M.<br/>
-            Friday and Saturday from sunset to 11:00 P.M.
-        </div>
-    </div>
-
-    <!-- The section below will only display if your show is set for Jukebox mode, there
-    is no need to delete it if you are using the Voting mode, and you might change your
-    mind on the selection method later! -->
-
-    <div {jukebox-dynamic-container}>
-        <div class="pink-title">
-            Playing Now
-        </div>
-
-        <div class="playing-now">
-            {NOW_PLAYING}<br/>
-        </div>
-        <hr class="separator">
-        <p class="orange-title">Next Selection</p>
-        <div style="text-align: center; color: white; font-size: 20px;">
-            {NEXT_PLAYLIST}
-        </div>
-        <p class="green-title"># Selected Songs</p>
-        <div style="text-align: center; color: white;font-size: 20px;">
-            {QUEUE_SIZE}
-        </div>
-
-        <p class="pink-title">Current Queue</p>
-        <div style="text-align: center; color: white;font-size: 20px;">
-            <div class="jukebox-queue-container">
-                {JUKEBOX_QUEUE}
-            </div>
-            <hr class="separator">
-        </div>
-
-    </div>
-
-    <!-- This section is used for the instructions that you want if you are using the Jukebox mode.
-    If you are using the voting mode, then it will not show.
-    Note that you can use the {QUEUE_SIZE} in your instructions, You shouldn't delete this if you are using the voting mode
-    because you might change your mind later.
-    Modify this to provide the instructions you want for your audience-->
-
-    <!-- JUKEBOX MODE INSTRUCTIONS -->
-
-    <div class="body_text" id="instructional-text" {jukebox-dynamic-container}> <br />
-        <div class="orange-title"> Pick Your Favorite</div>
-        🎃 Requests are limited to {QUEUE_DEPTH}  songs 🎃 <br />
-        🎃 Select any song that you would like to hear from the list below 🎃<br />
-        🎃 Songs will be played in the order that they are selected 🎃 <br />
-        <hr class="separator">
-        <br />
-    </div>
-
-    <!-- VOTING MODE INSTRUCTIONS -->
-
-    <div class="body_text" id="instructional-text" {playlist-voting-dynamic-container}>
-        <div class="green-title">Vote For Your Favorite</div>
-        👻 Vote for your favorite song from the list below 👻 <br >
-        👻 Your vote will be added to the song you choose 👻 <br />
-        👻 The song with the most votes will play next 👻<br />
-        👻 You can only vote once per round 👻<br />
-        👻 Voting will reset when the song with the highest votes starts to play 👻 <br />
-        <hr class="separator">
-
-    </div>
-
-    <!--
-      This is the section for the location code for the viewer to enter, if you have
-      location code enabled. It appears twice here, once for jukebox and once for
-      voting.
-    -->
-    <div {location-code-dynamic-container}>
-        <div id="location_code_text">
-            Enter the code below to submit a request:
-        </div>
-        <div id="location_code_container">
-            {LOCATION_CODE}
-        </div>
-    </div>
-
-    <!-- The section below will only display if your show is set for Voting mode, there
-    is no need to delete it if you are using the Jukebox mode, and you might change your
-    mind on the selection method later! -->
-
-    <div {playlist-voting-dynamic-container}>
-        <!-- Shows "X of N votes left this show" when a per-voter vote limit is set
-        (Remote Falcon #162). Renders nothing when no limit is configured. -->
-        <div class="body_text" id="votes-remaining" style="text-align: center; margin: 0 0 12px;">{VOTES_REMAINING}</div>
-        <div class="rtable">
-            <div class="cell-vote-playlist" style="border: none; cursor: text">
-                Song List
-            </div>
-            <div class="cell-vote" style="border: none; cursor: text">
-                Votes
-            </div>
-        </div>
-        <div class="rtable">
-            {PLAYLISTS}
-        </div><br />
-    </div>
-
-
-
-    <!-- The section below will only display if your show is set for Jukebox mode, there
-    is no need to delete it if you are using the Voting mode, and you might change your
-    mind on the selection method later! -->
-
-    <div {jukebox-dynamic-container}>
-        <div id="playlists_container">
-            {PLAYLISTS}
-        </div>
-    </div>
-    <!-- *****************************************
-        The sections below are for the error messages, don't delete them!
-        ************************************* -->
-
-    <div id="requestSuccessful" style="display: none">
-        <div class="innerRequestSuccessful">
-            Successfully Added!
-        </div>
-    </div>
-
-    <div id="requestFailed" style="display: none">
-        <div class="failed_Info_Box">
-            ERROR <br/>
-            An unexpected error has occurred! Sorry for the inconvenience.
-        </div>
-    </div>
-
-    <div id="requestPlaying" style="display: none">
-        <div class="failed_Info_Box">
-            SONG ALREADY REQUESTED <br/>
-            The selected song has already been requested.
-        </div>
-    </div>
-
-    <div id="queueFull" style="display: none">
-        <div class="failed_Info_Box">
-            QUEUE FULL<br/>
-            The queue is full. The maximum number of request is {QUEUE_DEPTH}
-        </div>
-    </div>
-
-    <div id="invalidLocation" style="display: none">
-        <div class="failed_Info_Box">
-            INVALID LOCATION <br/>
-            You are not located where the show is or didn't allow your location to be identified!
-        </div>
-    </div>
-
-    <div id="alreadyVoted" style="display: none">
-        <div class="failed_Info_Box">
-            ALREADY VOTED <br/>
-            You can only vote once per round, you will have to wait for the current song to finish before you can vote
-            again.
-        </div>
-    </div>
-    <div id="dailyVoteLimitReached" style="display: none">
-        <div class="failed_Info_Box">
-            OUT OF VOTES <br/>
-            You have used all of your votes for this show. Enjoy the lights!
-        </div>
-    </div>
-    <div id="sequenceUnavailable" style="display: none">
-        <div class="failed_Info_Box">
-            NOT AVAILABLE RIGHT NOW <br/>
-            That song is not available right now. Pick another one!
-        </div>
-    </div>
-
-    <div id="alreadyRequested" style="display: none">
-        <div class="failed_Info_Box">
-            ALREADY REQUESTED <br/>
-            You can only request once per round, you will have to wait for the current song to finish before you can request
-            again.
-        </div>
-    </div>
-
-    <div id="invalidLocationCode" style="display: none">
-        <div class="failed_Info_Box">
-            INVALID CODE <br/>
-            The code you entered is not correct!
-        </div>
-    </div>
-
-    <!-- end of error messages -->
-
-    <hr class="separator">
-
-    <div class="orange-title">
-        About our show</div>
-    <div id="instructional-text">
-        Enter whatever information you want like maybe details about your show or show times
-    </div>
-    <a href="https://remotefalcon.com" class="button">Visit Our
-        Website</a> <!-- change this to your website or delete if not needed -->
-
-    <div class="green-title"> <!-- modify or delete the links as needed -->
-        FOLLOW US</div>
-
-    <a style="display: inline-block;"
-       href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/PROFILE"
-       target="_blank"> <img style="border-radius: 3px; display: block;"
-                             src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/facebook.png"
-                             alt="" width="35" height="35"/> </a>
-    <a style="display: inline-block;" href="https://twitter.com/home?status=https://www.twitter.com/PROFILE"
-       target="_blank"> <img style="border-radius: 3px; display: block;"
-                             src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/twitter.png"
-                             alt="" width="35" height="35"/> </a>
-    <a style="display: inline-block;"
-       href="https://www.linkedin.com/shareArticle?mini=true&amp;url=[[SHORT_PERMALINK]]&amp;title=&amp;summary=&amp;source="
-       target="_blank"> <img style="border-radius: 3px; display: block;"
-                             src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/linkedin.png"
-                             alt="" width="35" height="35"/> </a>
-    <a style="display: inline-block;" href="[[SHORT_PERMALINK]]" target="_blank"> <img
-            style="border-radius: 3px; display: block;"
-            src="https://s3-eu-west-1.amazonaws.com/ecomail-assets/editor/social-icos/roundedwhite/instagram.png"
-            alt="" width="35" height="35"/> </a>
+ 
+<body>
+ 
+<!-- HEADER SECTION -->
+<div id="header_img_content">
+<img src="https://i.ibb.co/LzksQqyf/Header.png" alt="Header Image" loading="lazy" style="max-width: 100%;">
 </div>
-<div id="footer">
-    <img src="https://remote-falcon-uploads.nyc3.cdn.digitaloceanspaces.com/__global__/purple_halloween_footer.png" style="width:100%; height: auto; margin: auto;">
+
+
+<div id="your_logo" class="logo-container">
+<img src="https://i.ibb.co/DfBy83PG/logo-image.png" class="logo-image" alt="Logo" style="max-width: 30%;">
+</div><br /> 
+ 
+ 
+<!-- SHOW INFO -->
+<div class="show-title">Your Show Name</div><br /> 
+ 
+<div id="intro">Welcome to <br /> 
+Our Light Show</div>
+
+
+<div id="intro-text">
+A description of your show <br />
+and any other info you want to provide.<br />
+Some more info on your show. <br />
 </div>
+
+<div><img src="https://i.ibb.co/27f4sRnh/separator-image.png" class="separator-image"></div>
+ 
+<!-- SHOW HOURS -->
+<div {after-hours-message}>
+<img src="https://i.ibb.co/HDKJjDNh/off-air.png" alt="off-air" class="off-air-image" style="max-width: 150px; margin-right:10px;">
+ 
+<div class="show-hours-text">
+<div class="show-hours-title">Show Hours</div>
+ 
+<div class="hours-text" style="font-size: 18px;">
+Sun-Thurs from 6-10 PM<br />
+Fri-Sat from 5-11 PM
+ 
+</div></div></div> 
+<!-- LOCATION CODE MESSAGE
+Only displayed if you have this turned on in your RF settings -->
+<div {location-code-dynamic-container}>
+<div id="location_code_text">Enter the code below to submit a request:</div>
+<div id="location_code_container">{LOCATION_CODE}</div>
+</div>
+ 
+ 
+<!-- JUKEBOX MODE ENABLED
+Only displayed if you have Jukebox Mode enabled
+You can delete this entire section if you aren’t using Jukebox Mode-->
+
+<div {jukebox-dynamic-container}>
+ 
+<div class="playing-now-title"> Playing Now </div><br />
+<div class="playing-now-text">{NOW_PLAYING}</div><br />
+
+
+<div><img src="https://i.ibb.co/27f4sRnh/separator-image.png" class="separator-image"></div> <br />
+
+
+<div class="jukebox-title"> Next Selection </div>
+<div class="body_text"> {NEXT_PLAYLIST} </div><br />
+ 
+<div class="jukebox-title"> # Selected Songs </div>
+<div class="body_text"> {QUEUE_SIZE} </div><br />
+ 
+<div class="jukebox-title"> Current Queue </div>
+<div class="body_text"> {JUKEBOX_QUEUE} </div>
+</div><br />
+ 
+<!-- JUKEBOX MODE INSTRUCTIONS --> 
+<div id="jukebox-text" {jukebox-dynamic-container}>
+<div><img src="https://i.ibb.co/27f4sRnh/separator-image.png" alt="Jukebox DIV" class="separator-image"></div><br />
+ 
+<div class="jukebox-song-list" > Song List </div>
+ 
+<!-- Delete highlighted pink text if using EXPANDABLE categories
+<div class="jukebox-container"> Tap to Expand </div>-->
+ 
+<div class="jukebox_table"> {PLAYLISTS} </div>
+</div>
+<!-- END JUKEBOX MODE SECTION-->
+ 
+ 
+<!-- VOTING MODE ENABLED
+Only displayed if you have Voting Mode enabled
+You can delete this entire section if you aren’t using Voting Mode -->
+<div {playlist-voting-dynamic-container}>
+ 
+<!-- VOTING MODE INSTRUCTIONS -->
+<div><img src="https://i.ibb.co/27f4sRnh/separator-image.png" alt="Jukebox DIV" class="separator-image"></div><br />
+ 
+<div class="songlist_column"> Song List
+<div class="vote_column"> Votes </div>
+</div>
+
+
+<div class="voting_table"> {PLAYLISTS} </div><br />
+ 
+<div><img src="https://i.ibb.co/27f4sRnh/separator-image.png" alt="Jukebox DIV" class="separator-image"></div>
+ 
+</div>
+ 
+<!-- END VOTING MODE SECTION-->
+ 
+ 
+<!-- ERROR MESSAGES -->
+<div id="requestSuccessful" class="innerRequestSuccessful" style="display: none;">
+Successfully Added 🥳 </div>
+ 
+<div id="requestFailed" class="failed_Info_box" style="display: none;" > ERROR <br  /><br />
+An unexpected error has occurred! Sorry for the inconvenience. </div>
+<div id="requestPlaying" class="failed_Info_box" style="display: none;">
+SONG ALREADY REQUESTED <br  /><br />
+The selected song has already been requested.
+</div>
+ 
+<div id="queueFull" class="failed_Info_box" style="display: none;">QUEUE FULL<br /><br />
+The queue is full. The maximum number of request is {QUEUE_DEPTH}
+</div>
+ 
+<div id="invalidLocationCode" class="failed_Info_box" style="display: none;"> INVALID CODE 
+<div class="failed_Info_message"> You are not located where the show is or didn't allow your location to be identified! </div>
+</div>
+ 
+<div id="alreadyVoted" class="failed_Info_Box" style="display: none;">
+<div class="failed_Info_message"> ALREADY VOTED <br /><br />
+You may only vote once per round. You may vote again after the current song finishes 
+playing. </div>
+</div>
+
+
+<div id="alreadyRequested" class="failed_Info_Box" style="display: none;">
+<div class="failed_Info_message"> ALREADY REQUESTED <br /><br />
+You may only vote once per round. You may vote again after the current song finishes 
+playing. </div>
+</div>
+ 
+<div id="invalidLocation" style="display: none;">
+<div class="failed_Info_Box"> INVALID LOCATION <br />
+You are not located where the show is or didn't allow your location to be identified! </div>
+</div>
+ 
+ 
+<!-- FOOTER SHOW INFO -->
+<div class="about-show">About Our Show</div>
+<div id="instructional-text">Enter details about your show, such as its history, <br /> special features, or sponsors. </div>
+  
+<div><a href="https://remotefalcon.com" class="visit-site">Visit Our Website</a></div>
+ 
+<!-- SOCIAL MEDIA LINKS -->
+<div class="follow-us">
+
+
+<a href="mailto:someone@example.com" target="_blank">
+<img src="https://i.ibb.co/5y81JJv/Email.png" alt="Email">
+</a>
+
+
+ 
+<a href="https://www.facebook.com/" target="_blank">
+<img src="https://i.ibb.co/67Cbhcx7/FB.png" alt="FB Logo">
+</a>
+ 
+<a href="https://tiktok.com/" target="_blank">
+<img src="https://i.ibb.co/WWKXy8B2/TT.png" alt="TT Logo">
+</a>
+ 
+<a href="https://www.youtube.com" target="_blank">
+<img src="https://i.ibb.co/8DBYyyCw/YT.png" alt="YT Logo">
+</a>
+ 
+<a href="https://instagram.com" target="_blank">
+<img src="https://i.ibb.co/BH6HcsbN/IG.png" alt="IG Logo">
+</a>
+ 
+<div id="footer_img_content">
+<div><img src="https://i.ibb.co/zWW1hPGY/Footer.png" alt="Footer Img" loading="lazy" style="max-width: 100%;"></div>
+</div>
+ 
+ 
+</div>
+</body>
+</html>
