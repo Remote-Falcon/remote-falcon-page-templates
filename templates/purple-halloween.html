@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!doctype html>
+<html>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-<!-- External Fonts and Icons -->
+<!--
+   Purple Halloween template. Page graphics and layout are designed by Tracy Stram at StramMade3d.com
+
+   Since this will be embedded in the page, there is no need to add any html, head or body tags.
+   Simply add and/or modify elements you want and they will be added.
+
+   The following are the variables used to populate your lists so DON'T MODIFY THESE!!:
+   {PLAYLISTS} - Displays the list of your sequences for the viewer to request.
+   {NOW_PLAYING} - Displays the currently playing sequence.
+   {NEXT_PLAYLIST} - Displays the next sequence in the queue.
+   {QUEUE_SIZE} - Displays the current number of songs in the queue when using Jukebox mode.
+   {QUEUE_DEPTH} - Displays the size that you have configured for your queue. This can be used in error messages or your instructions if you want.
+   {LOCATION_CODE} - Displays the input field used to capture the location code.
+   {JUKEBOX_QUEUE} - Displays the list of sequences currently in the jukebox queue.
+   {VOTES_REMAINING} - Displays "X of N votes left this show" when a per-voter vote limit is set in Voting mode.
+-->
+
+<!-- External Fonts -->
 <link rel="stylesheet" href="https://use.typekit.net/wys0bqv.css">
-<link rel="stylesheet" href="https://use.typekit.net/sgn4nav.css">
-<link rel="stylesheet" href="https://use.typekit.net/wdk7mdz.css">
-<link rel="stylesheet" href="https://use.typekit.net/cnu0bcr.css">
-<link rel="stylesheet" href="https://use.typekit.net/wnw7euo.css">
- 
-<title>Purple Halloween Template for Remote Falcon</title>
- 
+
 <!-- CSS Styles -->
 <style type="text/css">
-<!--
  
 /**  BASE CONFIG **/
 * {
@@ -59,7 +66,7 @@ width: 75px;
 width: 50px;
 }
  
-@media screen and (max-width: 768px)
+@media screen and (max-width: 768px) {
 .show-title,
 .playing-now-title,
 .jukebox-title {
@@ -85,6 +92,7 @@ width: 75px;
 }
 .follow-us a img {
 width: 50px;
+}
 }
  
 @media screen and (max-width: 480px) {
@@ -203,6 +211,16 @@ margin: 0px auto 0px;
 }
 
 
+.playing-now-text,
+.body_text,
+.jukebox-queue-title {
+font-family: 'itc-benguiat-condensed';
+color: white;
+font-size: 20px;
+font-weight: normal;
+text-align: center;
+}
+
 .playing-now-text .sequence-image{
 font-family: 'itc-benguiat-condensed';
 color: white;
@@ -222,7 +240,7 @@ font-family: 'itc-benguiat-condensed';
 color: white;
 font-size: 14px;
 text-align: center;
-margin: 0px auto -10px;
+margin: 0px auto 10px;
 }
  
 #playlist-text {
@@ -359,13 +377,17 @@ max-width: 100%;
 margin: 5px auto -30px; 
 }
  
-.next-song .sequence-image,{
+.next-song .sequence-image {
 height: 30%;
 width: auto;
 padding-right: 10px;
 vertical-align: middle;
 }
 
+
+.jukebox-queue {
+margin-bottom: 14px; /** space between songs in the queue **/
+}
 
 .jukebox-queue .sequence-image {
 height: 30%;
@@ -583,7 +605,7 @@ border-radius: 15px;
 background-color: lawngreen;
 }
  
-.failed_Info_error {
+.failed_Info_Box {
 font-family: 'poppins';
 font-size: 24px;
 font-weight: bold;
@@ -627,11 +649,7 @@ background-color: orangered;}
 
 
 </style>
-</head>
 
-
- 
-<body>
  
 <!-- HEADER SECTION -->
 <div id="header_img_content">
@@ -724,6 +742,10 @@ You can delete this entire section if you aren’t using Voting Mode -->
 <!-- VOTING MODE INSTRUCTIONS -->
 <div><img src="https://i.ibb.co/27f4sRnh/separator-image.png" alt="Jukebox DIV" class="separator-image"></div><br />
  
+<!-- Shows "X of N votes left this show" when a per-voter vote limit is set.
+Renders nothing when no limit is configured. -->
+<div class="body_text" id="votes-remaining" style="margin: 0 0 12px;">{VOTES_REMAINING}</div>
+
 <div class="songlist_column"> Song List
 <div class="vote_column"> Votes </div>
 </div>
@@ -742,37 +764,40 @@ You can delete this entire section if you aren’t using Voting Mode -->
 <div id="requestSuccessful" class="innerRequestSuccessful" style="display: none;">
 Successfully Added 🥳 </div>
  
-<div id="requestFailed" class="failed_Info_box" style="display: none;" > ERROR <br  /><br />
+<div id="requestFailed" class="failed_Info_Box" style="display: none;" > ERROR <br  /><br />
 An unexpected error has occurred! Sorry for the inconvenience. </div>
-<div id="requestPlaying" class="failed_Info_box" style="display: none;">
+<div id="requestPlaying" class="failed_Info_Box" style="display: none;">
 SONG ALREADY REQUESTED <br  /><br />
 The selected song has already been requested.
 </div>
  
-<div id="queueFull" class="failed_Info_box" style="display: none;">QUEUE FULL<br /><br />
+<div id="queueFull" class="failed_Info_Box" style="display: none;">QUEUE FULL<br /><br />
 The queue is full. The maximum number of request is {QUEUE_DEPTH}
 </div>
  
-<div id="invalidLocationCode" class="failed_Info_box" style="display: none;"> INVALID CODE 
-<div class="failed_Info_message"> You are not located where the show is or didn't allow your location to be identified! </div>
+<div id="invalidLocationCode" class="failed_Info_Box" style="display: none;"> INVALID CODE <br /><br />
+The code you entered is not correct!
 </div>
  
-<div id="alreadyVoted" class="failed_Info_Box" style="display: none;">
-<div class="failed_Info_message"> ALREADY VOTED <br /><br />
-You may only vote once per round. You may vote again after the current song finishes 
-playing. </div>
+<div id="alreadyVoted" class="failed_Info_Box" style="display: none;"> ALREADY VOTED <br /><br />
+You may only vote once per round. You may vote again after the current song finishes playing.
 </div>
 
 
-<div id="alreadyRequested" class="failed_Info_Box" style="display: none;">
-<div class="failed_Info_message"> ALREADY REQUESTED <br /><br />
-You may only vote once per round. You may vote again after the current song finishes 
-playing. </div>
+<div id="dailyVoteLimitReached" class="failed_Info_Box" style="display: none;"> OUT OF VOTES <br /><br />
+You have used all of your votes for this show. Enjoy the lights!
+</div>
+
+<div id="sequenceUnavailable" class="failed_Info_Box" style="display: none;"> NOT AVAILABLE RIGHT NOW <br /><br />
+That song is not available right now. Pick another one!
+</div>
+
+<div id="alreadyRequested" class="failed_Info_Box" style="display: none;"> ALREADY REQUESTED <br /><br />
+You may only request once per round. You may request again after the current song finishes playing.
 </div>
  
-<div id="invalidLocation" style="display: none;">
-<div class="failed_Info_Box"> INVALID LOCATION <br />
-You are not located where the show is or didn't allow your location to be identified! </div>
+<div id="invalidLocation" class="failed_Info_Box" style="display: none;"> INVALID LOCATION <br /><br />
+You are not located where the show is or didn't allow your location to be identified!
 </div>
  
  
@@ -814,5 +839,3 @@ You are not located where the show is or didn't allow your location to be identi
  
  
 </div>
-</body>
-</html>
