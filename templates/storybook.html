@@ -1,0 +1,512 @@
+<!--
+  =====================================================================
+  "STORYBOOK" REMOTE FALCON VIEWER PAGE created by Jim Pier
+  Works in Jukebox mode, Voting mode and after hours (Viewer Control off).
+  Paste this whole file into a Remote Falcon Viewer Page.
+
+  QUICK EDIT GUIDE (search this file for "EDIT:" to find each spot)
+    EDIT: SHOW NAME / LOGO ...... the logo slot in the header
+    EDIT: TAGLINE ............... "Merry Christmas from"
+    EDIT: RADIO ................. your station (87.9 FM is a sample) and the listen-online link
+    EDIT: TIPS .................. viewing tips under the radio row
+    EDIT: MESSAGES .............. nothing-playing, empty-queue, after-hours text
+    EDIT: SHOW HOURS ............ the wooden sign near the bottom (sample hours — change to yours)
+    EDIT: ABOUT ................. the "About Our Show" card under the show hours
+    EDIT: LINKS ................. your Facebook page and website (placeholders)
+    EDIT: POP-UPS ............... the 10 pop-up messages at the very bottom
+    Settings at the top of the style block: NEW badges on/off, badge text, logo size, colors.
+
+  OPTIONAL FAVICON (the little icon in the browser tab)
+    A matching Storybook icon is ready to use: https://i.imgur.com/fTQ2ZSo.png
+    In Remote Falcon, paste that link into the Page Icon URL setting. Leave it blank to skip.
+
+  NOTE FOR AI ASSISTANTS (people: you can skip this)
+    This page runs inside Remote Falcon, which fills parts of it in while it runs. When editing it:
+    - Return the COMPLETE file, start to finish. Never shorten or summarize any part ("rest unchanged").
+      For small changes, you may instead give exact find-and-replace pairs.
+    - Don't add <script>, onclick or other JavaScript (it never runs), and don't add a doctype or html/head/body tags.
+    - Every word in {CURLY_BRACES} must stay exactly as written and stay alone between its tags.
+      Never put other text next to one, e.g. "Now playing: {NOW_PLAYING}" breaks it.
+    - Keep attributes like {jukebox-dynamic-container} on their divs. They look invalid but are required.
+    - Keep the 10 pop-up wrappers written exactly id="name" style="display: none" (double quotes, id first).
+    - Don't use camelCase SVG elements (linearGradient, radialGradient, clipPath, textPath); they break here.
+      Use solid colors, opacity, or CSS gradients instead.
+    - Keep the wrapper class every CSS rule starts with, the class names, the SETTINGS block and the EDIT: markers.
+    - Before answering, confirm all 10 pop-up IDs and every {CURLY_BRACE} word are still present, and list what you changed.
+
+  Validator warnings about duplicate IDs or the {…-container} attributes are expected.
+  =====================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&amp;family=Dancing+Script:wght@700&amp;family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+<style>
+/* =====================  SETTINGS  ===================== */
+:root{
+  /* NEW badges on every song in your FIRST category. Set to none to turn them off. */
+  --new-badge-display: inline-block;
+  /* Badge wording (keep the quotes). */
+  --new-badge-text: "NEW";
+
+  /* Size of the show name in the logo. 1 = full size. Long name? Lower it (e.g. .8 or .65) until it fits. */
+  --logo-scale: 1;
+
+  /* Colors */
+  --sky-top:#134f95; --sky-mid:#1b5fa8; --sky-low:#2a72c0;
+  --blue:#1b5fa8; --navy:#16325c; --ink:#14467f; --muted:#4f6584; --pale:#d6e6f8;
+  --red:#d42a2a; --gold:#f5c542; --line:#e6eef8; --art-bg:#dbe9f8;
+
+  /* Width of the content column on tablets and desktops. */
+  --column: 520px;
+}
+
+/* =====================  BASE  ===================== */
+html,body{margin:0;padding:0;background:#ffffff}
+body{font-family:'Nunito',system-ui,sans-serif;color:var(--navy);-webkit-text-size-adjust:100%}
+.sb, .sb *{box-sizing:border-box}
+.sb{font-variant-numeric:lining-nums;overflow-x:hidden}
+.sb a{color:inherit}
+.sb .wrap{width:100%;max-width:var(--column);margin:0 auto;padding:0 16px}
+.sb .label{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+/* Remote Falcon empties (but keeps) the sections that don't apply; hide them so they take no space. */
+.sb .top > div:empty,.sb .list > div:empty{display:none}
+
+/* =====================  HEADER  ===================== */
+.sb .sky{background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 40%,var(--sky-low) 100%);color:#fff}
+.sb .fringe{height:20px;background:radial-gradient(circle at 10px 0,#fff 11px,transparent 11.5px) repeat-x;background-size:20px 20px}
+.sb .hdr{position:relative;padding-top:4px;min-height:196px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sb .hdr .trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sb .tagline{position:relative;font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--pale)}
+/* Logo slot */
+.sb .logo-slot{position:relative;container-type:inline-size;width:100%;max-width:330px;margin:2px auto 0}
+.sb .logo-name{font-family:'Cinzel',serif;font-weight:900;font-size:calc(clamp(30px,15cqi,52px) * var(--logo-scale));line-height:1.05;letter-spacing:.04em;text-shadow:0 3px 0 rgba(8,30,70,.4);overflow-wrap:anywhere}
+.sb .logo-sub{font-family:'Cinzel',serif;font-weight:700;font-size:calc(clamp(16px,7.2cqi,24px) * var(--logo-scale));letter-spacing:.55em;margin-right:-.55em;color:var(--gold)}
+.sb .logo-img{display:block;width:100%;max-height:120px;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(8,30,70,.4))}
+.sb .logo-img:not([src*="://"]){display:none}
+.sb .logo-slot:has(.logo-img[src*="://"]) .logo-text{display:none}
+/* Optional backing for dark logos: add the class logo-slot--plate to the logo slot. */
+.sb .logo-slot--plate{background:radial-gradient(ellipse at center,rgba(255,255,255,.28),rgba(255,255,255,0) 70%);padding:8px 0}
+.sb .scene{display:block;width:100%;height:150px;margin-top:-6px}
+
+/* =====================  TOP CARDS  ===================== */
+.sb .top{display:flex;flex-direction:column;gap:10px;margin-top:-30px;position:relative;padding-bottom:18px}
+.sb .stack{display:flex;flex-direction:column;gap:10px}
+.sb .glass{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:18px;padding:12px 14px}
+.sb .radio{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sb .radio .station{display:flex;align-items:baseline;gap:8px}
+.sb .radio .fm{font-size:24px;font-weight:900}
+.sb .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none}
+.sb .btn-white{background:#fff;color:var(--blue)}
+.sb .btn-ghost{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;width:100%}
+.sb .tips{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--pale);padding:0 4px}
+.sb .tips svg{flex-shrink:0}
+.sb .tips b{color:#fff}
+.sb .tip-loc:empty{display:none}
+
+/* Playing card */
+.sb .playing{background:#fff;border-radius:22px;padding:16px;color:var(--navy);box-shadow:0 10px 0 rgba(8,30,70,.25)}
+.sb .playing-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.sb .playing-head .label{color:var(--red)}
+.sb .timer{font-size:13px;font-weight:900;color:#fff;background:var(--red);border-radius:999px;padding:3px 10px}
+.sb .timer::after{content:" left"}
+.sb .now{position:relative;min-height:66px;padding-left:80px;display:flex;flex-wrap:wrap;align-content:center;font-size:21px;font-weight:900;line-height:1.15}
+.sb .now::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:66px;height:66px;border-radius:50%;
+  background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M9 18V5l12-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='16' r='3'/%3E%3C/svg%3E") center/26px no-repeat}
+.sb .now:has(img)::before{display:none}
+.sb .now img{position:absolute;left:0;top:50%;transform:translateY(-50%);width:66px;height:66px;border-radius:50%;object-fit:cover}
+.sb .now > div{flex-basis:100%;font-size:13px;font-weight:600;color:var(--muted);margin-top:2px}
+.sb .now > div:empty{display:none}
+.sb .upnext{margin-top:10px;font-size:13px;color:var(--muted)}
+.sb .upnext .next{color:var(--navy);font-weight:800}
+.sb .upnext .next img,.sb .upnext .next div{display:none}
+.sb .upnext:has(.next:empty){display:none}
+/* Nothing playing */
+.sb .idle{display:none;gap:14px;align-items:center}
+.sb .idle-icon{width:66px;height:66px;border-radius:50%;background:#e8f0fa;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb .idle-title{font-size:19px;font-weight:900;line-height:1.2}
+.sb .idle-text{font-size:13px;color:var(--muted);margin-top:3px}
+.sb .playing:has(.now:empty) .now,
+.sb .playing:has(.now:empty) .timer,
+.sb .playing:has(.now:empty) .upnext{display:none}
+.sb .playing:has(.now:empty) .idle{display:flex}
+
+/* Queue (jukebox) */
+.sb .queue-head{display:flex;justify-content:space-between;align-items:baseline}
+.sb .queue-head .label{color:var(--pale)}
+.sb .qcount{font-size:13px;color:var(--pale)}
+.sb .qcount b{color:#fff;font-size:16px}
+.sb .qlist{counter-reset:q;max-height:184px;overflow-y:auto;margin-top:2px}
+.sb .qlist .jukebox-queue{counter-increment:q;font-size:14px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.sb .qlist .jukebox-queue:last-child{border-bottom:0}
+.sb .qlist .jukebox-queue::before{content:counter(q) ". "}
+.sb .qlist .jukebox-queue img,.sb .qlist .jukebox-queue div{display:none}
+.sb .queue:has(.qlist:empty){display:none}
+.sb .queue-empty{display:none;border:2px dashed rgba(255,255,255,.45);border-radius:18px;padding:16px 14px;gap:12px;align-items:center;background:rgba(255,255,255,.08)}
+.sb .queue:has(.qlist:empty) + .queue-empty{display:flex}
+.sb .queue-empty .bubble{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb .queue-empty .t{font-size:16px;font-weight:900}
+.sb .queue-empty .s{font-size:13px;color:var(--pale)}
+
+/* Votes left (voting) */
+.sb .votes-left{display:flex;gap:12px;align-items:center}
+.sb .votes-left .vl{font-size:17px;font-weight:900}
+.sb .votes-left .s{font-size:12px;color:var(--pale)}
+.sb .votes-left:has(.vl:empty){display:none}
+
+/* After hours */
+.sb .closed{background:#fff;border-radius:22px;padding:20px 18px;color:var(--navy);box-shadow:0 10px 0 rgba(8,30,70,.25);display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.sb .closed .moon{width:62px;height:62px;border-radius:50%;background:#e8f0fa;display:flex;align-items:center;justify-content:center}
+.sb .closed .t{font-size:21px;font-weight:900;line-height:1.2}
+.sb .closed .s{font-size:14px;color:var(--muted);line-height:1.45}
+
+.sb .treeline{display:block;width:100%;height:70px;margin-bottom:-1px}
+
+/* =====================  SONG LIST  ===================== */
+.sb .list{padding-top:4px;padding-bottom:32px;display:flex;flex-direction:column;gap:14px}
+.sb .list-head{text-align:center}
+.sb .list-head .h{font-family:'Dancing Script',cursive;font-size:44px;font-weight:700;line-height:1;color:var(--blue)}
+.sb .list-head .s{font-size:14px;color:var(--muted);margin-top:4px}
+.sb .songs{display:flex;flex-wrap:wrap}
+.sb .category-section{width:100%}
+.sb .category-label{font-family:'Dancing Script',cursive;font-size:30px;font-weight:700;color:var(--blue);margin:14px 0 2px;flex-basis:100%}
+
+/* One song row (jukebox: .jukebox-list, voting: .cell-vote-playlist) */
+.sb .jukebox-list,.sb .cell-vote-playlist{position:relative;width:100%;min-height:68px;padding:9px 0 9px 62px;display:flex;flex-wrap:wrap;align-content:center;
+  font-size:16px;font-weight:800;line-height:1.25;color:var(--navy);border-bottom:1px solid var(--line);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sb .jukebox-list:active,.sb .cell-vote-playlist:active{background:#f3f7fc}
+.sb .jukebox-list::before,.sb .cell-vote-playlist::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;
+  background:var(--art-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231b5fa8' stroke-width='2'%3E%3Cpath d='M9 18V5l12-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='16' r='3'/%3E%3C/svg%3E") center/18px no-repeat}
+.sb .jukebox-list:has(img)::before,.sb .cell-vote-playlist:has(img)::before{display:none}
+.sb .jukebox-list img,.sb .cell-vote-playlist img{position:absolute;left:0;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;object-fit:cover}
+.sb .jukebox-list-artist,.sb .cell-vote-playlist-artist{flex-basis:100%;font-size:12px;font-weight:600;color:var(--muted)}
+.sb .jukebox-list-artist:empty,.sb .cell-vote-playlist-artist:empty{display:none}
+.sb .sequence-unavailable::before{opacity:.4}
+.sb .sequence-unavailable-hint{flex-basis:100%;font-size:12px;font-weight:700;color:var(--muted)}
+/* NEW badge on the first category */
+.sb .category-section:not(.category-section ~ .category-section) .jukebox-list,
+.sb .category-section:not(.category-section ~ .category-section) .cell-vote-playlist{padding-right:58px}
+.sb .category-section:not(.category-section ~ .category-section) .jukebox-list::after,
+.sb .category-section:not(.category-section ~ .category-section) .cell-vote-playlist::after{content:var(--new-badge-text);display:var(--new-badge-display);position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  font-size:10px;font-weight:900;letter-spacing:.06em;color:#fff;background:var(--red);border-radius:999px;padding:3px 9px}
+/* Voting: song cell + vote-count cell side by side */
+.sb .votes .cell-vote-playlist{width:calc(100% - 64px)}
+.sb .cell-vote{width:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid var(--line);
+  font-size:19px;font-weight:900;line-height:1;color:var(--blue);background:linear-gradient(#e8f0fa,#e8f0fa) center/52px 46px no-repeat}
+.sb .cell-vote::after{content:"votes";font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.sb .sequence-unavailable + .cell-vote{opacity:.4}
+
+/* Remote Falcon wraps categorized voting rows in .cell-vote-row (inline align-items:flex-end) */
+.sb .cell-vote-row{align-items:stretch!important}
+.sb .cell-vote-row .cell-vote-playlist{flex:1 1 auto;min-width:0}
+.sb .cell-vote-row .cell-vote{flex:0 0 64px}
+/* Location help (from Remote Falcon) */
+.sb .retry:empty{display:none}
+.sb .rf-location-notice{background:#f3f7fc;border:1px solid var(--line);border-radius:18px;padding:14px 16px;color:var(--navy);font-family:'Nunito',sans-serif}
+.sb .rf-location-notice__heading{font-weight:900;font-size:16px}
+.sb .rf-location-notice__subline,.sb .rf-location-notice__steps,.sb .rf-location-notice__footer{font-size:13px;color:var(--muted)}
+.sb .rf-location-notice__button{background:var(--blue)!important;color:#fff!important;border:0!important;border-radius:999px!important;font-weight:800!important;min-height:44px;padding:0 18px!important}
+
+/* Location code (only when the code check is on) */
+.sb .code-box{background:#f3f7fc;border-radius:18px;padding:14px 16px;text-align:center}
+.sb .code-box .t{font-weight:900;font-size:16px;margin-bottom:8px}
+.sb .code-box input{font-size:20px!important;text-align:center;font-family:'Nunito',sans-serif}
+
+/* Show hours sign */
+.sb .sign-wrap{display:flex;justify-content:center;margin-top:6px}
+.sb .sign{display:flex;flex-direction:column;align-items:center}
+.sb .sign-board{background:#9b6234;border:3px solid #7a4a24;border-radius:10px;padding:12px 18px;text-align:center;color:#fff7ea;box-shadow:inset 0 0 0 2px #b37945}
+.sb .sign-board .t{font-size:12px;font-weight:900;letter-spacing:.14em}
+.sb .sign-board .h{font-size:15px;line-height:1.6;margin-top:4px}
+.sb .sign-post{width:16px;height:70px;background:repeating-linear-gradient(-45deg,var(--red) 0 8px,#fff 8px 16px);border:1px solid #f0c9c9;border-radius:0 0 4px 4px}
+
+.sb .foot{display:flex;flex-direction:column;gap:10px;align-items:center}
+.sb .btn-blue{width:100%;min-height:48px;background:var(--blue);color:#fff;font-weight:900;font-size:15px}
+.sb .site{font-size:14px;font-weight:800;color:var(--red)}
+
+/* About card */
+.sb .about{background:#f3f7fc;border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-align:center}
+.sb .about-t{font-family:'Dancing Script',cursive;font-size:30px;font-weight:700;line-height:1.1;color:var(--blue)}
+.sb .about-s{font-size:14px;color:var(--muted);line-height:1.5;margin-top:4px}
+
+/* =====================  POP-UPS  ===================== */
+/* Remote Falcon shows one of these for a few seconds. position:fixed keeps it on screen wherever the viewer has scrolled. */
+/* The dimmed backdrop catches every tap, so a tap meant to close the pop-up never requests a song.
+   Tapping anywhere on the pop-up gives it focus, which fades it out (no script needed).
+   Buttons inside the location help keep working: tapping them focuses the button, not the pop-up.
+   If a phone doesn't support this, Remote Falcon still hides the pop-up after a few seconds. */
+.sb .pop{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(8,30,70,.55);
+  cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;opacity:1;transform:none;transition:opacity .2s ease,transform 0s linear 0s}
+/* Fade out, then slide the (invisible) backdrop off screen so the page is usable again.
+   It must stay rendered (not hidden) or the browser drops focus and the pop-up would come back. */
+.sb .pop:focus{opacity:0;transform:translateY(200vh);transition:opacity .2s ease,transform 0s linear .22s}
+.sb .pop-hint{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9aa9bf;margin-top:12px}
+.sb .pop-card{position:relative;width:100%;max-width:300px;background:#fff;border-radius:22px;padding:22px 20px;text-align:center;color:var(--navy);box-shadow:0 10px 0 rgba(8,30,70,.3);animation:popin .25s ease-out}
+.sb .pop-icon{width:48px;height:48px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;background:#e8f0fa}
+.sb .pop-ok .pop-icon{background:var(--red)}
+.sb .pop-t{font-size:23px;font-weight:900;color:var(--blue);line-height:1.15}
+.sb .pop-s{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.4}
+.sb .pop-card .retry-inline:empty{display:none}
+.sb .pop-card .rf-location-notice{margin-top:12px;text-align:left}
+@keyframes popin{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* =====================  SCREEN SIZES  ===================== */
+/* Narrow phones: stack "Tune to" above the station so Listen online stays on the same line. */
+@media (max-width:420px){
+  .sb .radio{flex-wrap:nowrap}
+  .sb .radio .station{flex-direction:column;align-items:flex-start;gap:0}
+  .sb .radio .label{font-size:10px}
+  .sb .radio .fm{line-height:1.05}
+}
+@media (max-width:359px){
+  .sb .radio .fm{font-size:21px}
+  .sb .now{font-size:19px}
+  .sb .list-head .h{font-size:38px}
+}
+@media (orientation:landscape) and (max-height:500px){
+  .sb .hdr{min-height:150px}
+  .sb .scene{height:100px}
+}
+@media (prefers-reduced-motion:reduce){.sb .pop-card{animation:none}}
+</style>
+
+<div class="sb">
+
+  <!-- =====================  HEADER  ===================== -->
+  <div class="sky">
+    <div class="fringe"></div>
+    <div class="wrap hdr">
+      <svg class="trail" viewBox="0 0 390 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+                    <g id="sbdeer" fill="#ffffff" stroke="#ffffff" stroke-linecap="round">
+            <ellipse cx="0" cy="0" rx="12" ry="5" stroke="none"/><path d="M8-2 14-10 17-9 12 0z" stroke="none"/><ellipse cx="17.5" cy="-11" rx="4.5" ry="2.6" stroke="none"/>
+            <path d="M15-13 13-20M13.6-17.5 10-19M17-13 18.5-20.5M18-17.5 21.5-19" fill="none" stroke-width="1.3"/><path d="M8 3 16 7M5 3 12 10M-8 3-17 7M-10 2-18 0" fill="none" stroke-width="2.2"/>
+          </g>
+        </defs>
+        <g fill="#ffffff" opacity="0.85"><circle cx="30" cy="20" r="1.8"/><circle cx="110" cy="12" r="1.4"/><circle cx="20" cy="120" r="1.6"/><circle cx="372" cy="160" r="1.5"/><circle cx="350" cy="110" r="1.4"/></g>
+        <path d="M14 168C80 178 140 40 286 30" fill="none" stroke="#ffe08a" stroke-opacity="0.55" stroke-width="2.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+        <g fill="#ffe08a"><path d="m70 164 2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path d="m186 52 2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z"/><circle cx="120" cy="122" r="1.8"/><circle cx="240" cy="36" r="1.8"/></g>
+        <g transform="translate(292 28) rotate(-8) scale(0.9)">
+          <use href="#sbdeer" x="70" y="-6"/><use href="#sbdeer" x="44" y="0"/><path d="M28 2 60-2" stroke="#ffffff" stroke-width="1"/>
+          <g fill="#ffffff"><circle cx="-4" cy="-14" r="9"/><circle cx="11" cy="-14" r="4"/><path d="M7-17 12-27 16-17z"/><path d="M-14-6Q-18-20-10-20L-6-10H22Q28-10 30-2L32 4H-12Q-16 4-14-6Z"/><path d="M-16 10H32Q40 10 40 2" fill="none" stroke="#ffffff" stroke-width="2.6"/></g>
+        </g>
+      </svg>
+
+      <!-- EDIT: TAGLINE -->
+      <div class="tagline">Merry Christmas from</div>
+
+      <!-- EDIT: SHOW NAME / LOGO
+           Text logo (default): change the two lines below to your show's name.
+             Long name? Lower --logo-scale in the SETTINGS at the top of the style block.
+           Image logo instead: paste your image's full link between the quotes in src="" on the <img> line below
+             (example: src="https://i.imgur.com/abc123.png"). The name text hides automatically.
+             To go back to the text name, empty the quotes again: src=""
+           Best image: transparent PNG or SVG, wide shape (about 3:1), at least 900 px wide, light colors.
+           Dark logo? Add  logo-slot--plate  to the class below for a soft light backing. -->
+      <div class="logo-slot">
+        <div class="logo-text">
+          <div class="logo-name">YOUR SHOW</div>
+          <div class="logo-sub">NAME</div>
+        </div>
+        <img class="logo-img" src="" alt="">
+      </div>
+    </div>
+
+    <svg class="scene" viewBox="-1200 0 3600 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <!-- Each scenery layer is mirrored left and right so wide screens show more of it instead of zooming in. -->
+      <g id="sbmt"><path d="M0 80 70 40 140 70 230 25 300 65 360 30 405 75 460 45 505 70 560 20 615 70 675 25 730 70 790 40 860 70 930 30 1000 70 1070 35 1140 65 1200 40V150H0z" fill="#5b9be2"/></g><use href="#sbmt" transform="scale(-1 1)"/><use href="#sbmt" transform="translate(2400 0) scale(-1 1)"/>
+      <g id="sbcap"><path d="M560 20 547 34 558 33 567 43 574 33 584 37zM675 25 662 39 674 36 683 47 690 37 700 40z" fill="#d6e8fb"/></g><use href="#sbcap" transform="scale(-1 1)"/><use href="#sbcap" transform="translate(2400 0) scale(-1 1)"/>
+      <g id="sbtr"><path d="M0 125l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22l11 -34 11 34l9 -26 9 26l10 -30 10 30l8 -24 8 24l11 -34 11 34l7 -20 7 20l10 -30 10 30l8 -22 8 22V150H0z" fill="#14467f"/></g><use href="#sbtr" transform="scale(-1 1)"/><use href="#sbtr" transform="translate(2400 0) scale(-1 1)"/>
+      <g transform="translate(520 82)"><path d="M0 18 14 4 28 18V44H0z" fill="#ffd27a"/><path d="M-3 19 14 2 31 19" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/><rect x="10" y="28" width="8" height="16" fill="#9b6234"/><rect x="4" y="21" width="6" height="6" fill="#fff3c4"/></g>
+      <g transform="translate(552 74)"><path d="M0 22 18 4 36 22V52H0z" fill="#e86a6a"/><path d="M-3 23 18 1 39 23" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/><rect x="13" y="34" width="10" height="18" fill="#7a4a24"/><rect x="5" y="25" width="7" height="7" fill="#fff3c4"/><rect x="24" y="25" width="7" height="7" fill="#fff3c4"/></g>
+      <g transform="translate(632 86)"><path d="M0 16 13 3 26 16V40H0z" fill="#9d8cff"/><path d="M-3 17 13 1 29 17" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/><rect x="9" y="26" width="8" height="14" fill="#7a4a24"/></g>
+      <g transform="translate(605 66)"><path d="M0 0 18 26H-18z" fill="#2f8f47"/><path d="M0 16 23 44H-23z" fill="#2a8442"/><path d="m0-10 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#f5c542"/><circle cx="-6" cy="22" r="2.5" fill="#d42a2a"/><circle cx="7" cy="34" r="2.5" fill="#f5c542"/><circle cx="-10" cy="38" r="2.5" fill="#5aa9ff"/></g>
+      <g id="sbhz"><path d="M0 128c300-16 500-18 600-9s400 9 600-5V150H0z" fill="#ffffff" opacity="0.25"/></g><use href="#sbhz" transform="scale(-1 1)"/><use href="#sbhz" transform="translate(2400 0) scale(-1 1)"/>
+    </svg>
+
+    <div class="wrap top">
+      <!-- EDIT: RADIO — change 87.9 FM to your station.
+           The Listen online button uses PulseMesh (https://player.pulsemesh.io/), which works for any show
+           that has PulseMesh streaming turned on. Not using it? Delete the whole <a>…</a> button. -->
+      <div class="glass radio">
+        <div class="station"><span class="label" style="color:var(--pale)">Tune to</span><span class="fm">87.9 FM</span></div>
+        <a class="btn btn-white" href="https://player.pulsemesh.io/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>Listen online</a>
+      </div>
+
+      <!-- OPTIONAL: Facebook button under the radio row. Remove the comment markers to show it.
+      <a class="btn btn-ghost" href="https://www.facebook.com/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Follow us on Facebook</a>
+      -->
+
+      <!-- EDIT: TIPS — the first part only shows when the GPS location check is on -->
+      <div class="tips">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span><span class="tip-loc" {location-permission-dynamic-container}><b>Allow location when asked</b> · </span>Dim headlights · Keep driveways clear</span>
+      </div>
+
+      <!-- ===== JUKEBOX MODE: playing + queue ===== -->
+      <div {jukebox-dynamic-container}>
+        <div class="stack">
+          <div class="playing">
+            <div class="playing-head"><span class="label">Playing</span><span class="timer">{NOW_PLAYING_TIMER}</span></div>
+            <div class="now">{NOW_PLAYING}</div>
+            <div class="upnext">Up next: <b class="next">{NEXT_PLAYLIST}</b></div>
+            <!-- EDIT: MESSAGES — shown when nothing is playing -->
+            <div class="idle">
+              <div class="idle-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/><path d="m9 3 3 2 3-2M9 21l3-2 3 2M3 9l2 3-2 3M21 9l-2 3 2 3"/></svg></div>
+              <div><div class="idle-title">The lights are taking a breath</div><div class="idle-text">The next song starts in a moment. Pick one below to hear it next!</div></div>
+            </div>
+          </div>
+
+          <div class="glass queue">
+            <div class="queue-head"><span class="label">Requests in line</span><span class="qcount"><b>{QUEUE_SIZE}</b> of {QUEUE_DEPTH}</span></div>
+            <div class="qlist">{JUKEBOX_QUEUE}</div>
+          </div>
+          <!-- EDIT: MESSAGES — shown when no songs are requested -->
+          <div class="queue-empty">
+            <div class="bubble"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <div style="flex:1"><div class="t">No requests yet</div><div class="s">Pick a song below and yours plays next!</div></div>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VOTING MODE: playing + votes left ===== -->
+      <div {playlist-voting-dynamic-container}>
+        <div class="stack">
+          <div class="playing">
+            <div class="playing-head"><span class="label">Playing</span><span class="timer">{NOW_PLAYING_TIMER}</span></div>
+            <div class="now">{NOW_PLAYING}</div>
+            <div class="upnext">Up next: <b class="next">{NEXT_PLAYLIST}</b></div>
+            <div class="idle">
+              <div class="idle-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/><path d="m9 3 3 2 3-2M9 21l3-2 3 2M3 9l2 3-2 3M21 9l-2 3 2 3"/></svg></div>
+              <div><div class="idle-title">The lights are taking a breath</div><div class="idle-text">The next song starts in a moment. Vote below for what plays next!</div></div>
+            </div>
+          </div>
+          <!-- Shows only when a Daily Vote Limit is set -->
+          <div class="glass votes-left">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#f5c542" aria-hidden="true" style="flex-shrink:0"><path d="m12 2 2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg>
+            <div><div class="vl">{VOTES_REMAINING}</div><div class="s">The song with the most votes plays next.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== AFTER HOURS (Viewer Control off) ===== -->
+      <div {after-hours-message}>
+        <!-- EDIT: MESSAGES — after hours -->
+        <div class="closed">
+          <div class="moon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="m17 3 .8 1.7 1.7.8-1.7.8L17 8l-.8-1.7-1.7-.8 1.7-.8z"/></svg></div>
+          <div class="t">Song requests are closed</div>
+          <div class="s">Requests open during show hours. Come back and pick your favorites!</div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="treeline" viewBox="-1200 0 3600 70" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g id="sbtlt"><path d="M0 50l12 -36 12 36l9 -28 9 28l13 -40 13 40l10 -30 10 30l12 -36 12 36l9 -26 9 26l13 -42 13 42l10 -31 10 31l12 -35 12 35l9 -27 9 27l13 -40 13 40l10 -31 10 31l12 -37 12 37l9 -28 9 28l13 -41 13 41l10 -30 10 30l12 -36 12 36l9 -28 9 28l13 -40 13 40l10 -30 10 30l12 -36 12 36l9 -26 9 26l13 -42 13 42l10 -31 10 31l12 -35 12 35l9 -27 9 27l13 -40 13 40l10 -31 10 31l12 -37 12 37l9 -28 9 28l13 -41 13 41l10 -30 10 30l12 -36 12 36l9 -28 9 28l13 -40 13 40l10 -30 10 30l12 -36 12 36l9 -26 9 26l13 -42 13 42l10 -31 10 31l12 -35 12 35l9 -27 9 27l13 -40 13 40l10 -31 10 31l12 -37 12 37l9 -28 9 28l13 -41 13 41l10 -30 10 30l12 -36 12 36l9 -28 9 28l13 -40 13 40l10 -30 10 30l12 -36 12 36l9 -26 9 26l13 -42 13 42V70H0z" fill="#14467f"/></g><use href="#sbtlt" transform="scale(-1 1)"/><use href="#sbtlt" transform="translate(2400 0) scale(-1 1)"/>
+      <g id="sbtls"><path d="M0 56c300-14 500-16 600-8s400 8 600-4V70H0z" fill="#ffffff"/></g><use href="#sbtls" transform="scale(-1 1)"/><use href="#sbtls" transform="translate(2400 0) scale(-1 1)"/>
+    </svg>
+  </div>
+
+  <!-- =====================  SONG LIST  ===================== -->
+  <div class="wrap list">
+
+    <!-- Location code entry (only when the code check is on) -->
+    <div {location-code-dynamic-container}>
+      <div class="code-box"><div class="t">Enter the code from our sign</div><div>{LOCATION_CODE}</div></div>
+    </div>
+
+    <!-- Remote Falcon's location help box (only when GPS check is on and the viewer can't request yet) -->
+    <div class="retry">{RETRY_LOCATION}</div>
+
+    <div {jukebox-dynamic-container}>
+      <div class="list-head"><div class="h">Pick a Song</div><div class="s">Tap any song to add it to the line.</div></div>
+      <div class="songs">{PLAYLISTS}</div>
+    </div>
+
+    <div {playlist-voting-dynamic-container}>
+      <div class="list-head"><div class="h">Vote for a Song</div><div class="s">Tap a song to vote. The song with the most votes plays next!</div></div>
+      <div class="songs votes">{PLAYLISTS}</div>
+    </div>
+
+    <!-- EDIT: SHOW HOURS — these are sample hours; change the days and times to yours. -->
+    <div class="sign-wrap">
+      <div class="sign">
+        <div class="sign-board">
+          <div class="t">SHOW HOURS</div>
+          <div class="h"><b>Mon – Thu</b> 6–10 PM<br><b>Fri – Sun</b> 6–11 PM</div>
+        </div>
+        <div class="sign-post"></div>
+      </div>
+    </div>
+
+    <!-- EDIT: ABOUT — a few sentences about your show. Delete this whole card if you don't want it. -->
+    <div class="about">
+      <div class="about-t">About Our Show</div>
+      <div class="about-s">Info you want to share about your show.</div>
+    </div>
+
+    <!-- EDIT: LINKS — replace facebook.com with your Facebook page link and yourwebsitelink.com with your website (both the link and the text). Delete either one you don't need. -->
+    <div class="foot">
+      <a class="btn btn-blue" href="https://www.facebook.com/" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Follow us on Facebook</a>
+      <a class="site" href="https://yourwebsitelink.com" target="_blank" rel="noopener">yourwebsitelink.com</a>
+    </div>
+  </div>
+
+  <!-- =====================  POP-UPS  =====================
+       EDIT: POP-UPS — change the wording inside .pop-t (headline) and .pop-s (message).
+       Keep each id="…" exactly as written and keep style="display: none" right after it. -->
+  <div id="requestSuccessful" style="display: none"><div class="pop pop-ok" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <div class="pop-t">You're in line!</div><div class="pop-s">Your song will play soon. Merry Christmas!</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="requestPlaying" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#1b5fa8" aria-hidden="true"><path d="m12 2 2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg></div>
+    <div class="pop-t">Great pick!</div><div class="pop-s">That song is already playing or coming up next.</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="queueFull" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
+    <div class="pop-t">The line is full</div><div class="pop-s">Please try again after the next song.</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="alreadyRequested" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+    <div class="pop-t">One at a time!</div><div class="pop-s">You can request another song after this one plays.</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="alreadyVoted" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+    <div class="pop-t">You've already voted</div><div class="pop-s">Vote again when the next song starts.</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="sequenceUnavailable" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></div>
+    <div class="pop-t">That song is resting</div><div class="pop-s">It'll be back soon — pick another favorite!</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="dailyVoteLimitReached" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#1b5fa8" aria-hidden="true"><path d="m12 2 2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg></div>
+    <div class="pop-t">That's all your votes for tonight</div><div class="pop-s">Thanks for playing along!</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="invalidLocation" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+    <div class="pop-t">We couldn't confirm you're nearby</div><div class="pop-s">Please allow location so we know you're at the show.</div>
+    <div class="retry-inline">{RETRY_LOCATION_INLINE}</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="invalidLocationCode" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+    <div class="pop-t">That code didn't work</div><div class="pop-s">Check the code on our sign and try again.</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+  <div id="requestFailed" style="display: none"><div class="pop" tabindex="0" aria-label="Close message"><div class="pop-card" role="status" aria-live="polite">
+    <div class="pop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b5fa8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+    <div class="pop-t">Something went wrong</div><div class="pop-s">Please try again in a moment.</div>
+    <div class="pop-hint">Tap to close</div></div></div></div>
+
+</div>
