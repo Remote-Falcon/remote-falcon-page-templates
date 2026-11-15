@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "templates": [
+    { "file": "the-og.html", "title": "The OG", "author": "Rick Harris" },
+    { "file": "purple-halloween.html", "title": "Purple Halloween", "author": "StramMade3D", "season": "halloween" },
+    { "file": "red-and-white.html", "title": "Red & White", "author": "StramMade3D", "season": "christmas" },
+    { "file": "on-air.html", "title": "On Air", "author": "Jason Toy" },
+    { "file": "lumos-light-show.html", "title": "Lumos Light Show", "author": "James Vance" },
+    { "file": "dynamic-menu.html", "title": "Dynamic Menu", "author": "Matt Orelup" },
+    { "file": "candy-cane.html", "title": "Candy Cane", "author": "Jim Pier", "season": "christmas" },
+    { "file": "santa.html", "title": "Santa", "author": "Jim Pier", "season": "christmas" },
+    { "file": "storybook.html", "title": "Storybook", "author": "Jim Pier", "season": "christmas" },
+    { "file": "pumpkin-patch.html", "title": "Pumpkin Patch", "author": "Jim Pier", "season": "halloween" },
+    { "file": "witchs-brew.html", "title": "Witch's Brew", "author": "Jim Pier", "season": "halloween" }
+  ]
+}
