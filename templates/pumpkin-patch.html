@@ -20,20 +20,6 @@
     A matching Pumpkin Patch icon is ready to use: https://i.imgur.com/guFD4SZ.png
     In Remote Falcon, paste that link into the Page Icon URL setting. Leave it blank to skip.
 
-  NOTE FOR AI ASSISTANTS (people: you can skip this)
-    This page runs inside Remote Falcon, which fills parts of it in while it runs. When editing it:
-    - Return the COMPLETE file, start to finish. Never shorten or summarize any part ("rest unchanged").
-      For small changes, you may instead give exact find-and-replace pairs.
-    - Don't add <script>, onclick or other JavaScript (it never runs), and don't add a doctype or html/head/body tags.
-    - Every word in {CURLY_BRACES} must stay exactly as written and stay alone between its tags.
-      Never put other text next to one, e.g. "Now playing: {NOW_PLAYING}" breaks it.
-    - Keep attributes like {jukebox-dynamic-container} on their divs. They look invalid but are required.
-    - Keep the 10 pop-up wrappers written exactly id="name" style="display: none" (double quotes, id first).
-    - Don't use camelCase SVG elements (linearGradient, radialGradient, clipPath, textPath); they break here.
-      Use solid colors, opacity, or CSS gradients instead.
-    - Keep the wrapper class every CSS rule starts with, the class names, the SETTINGS block and the EDIT: markers.
-    - Before answering, confirm all 10 pop-up IDs and every {CURLY_BRACE} word are still present, and list what you changed.
-
   Validator warnings about duplicate IDs or the {…-container} attributes are expected.
   =====================================================================
 -->
