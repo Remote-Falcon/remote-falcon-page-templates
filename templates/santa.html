@@ -9,7 +9,7 @@
     EDIT: LOCATION LINE ......... "HO HO HO · YOUR LOCATION" under the header
     EDIT: RADIO ................. your station (87.9 FM is a sample) and the listen-online link
     EDIT: TIPS .................. viewing tips under the radio row
-    EDIT: MESSAGES .............. nothing-playing, empty-list, after-hours text
+    EDIT: MESSAGES .............. nothing-playing, empty-list, leading-the-vote, after-hours text
     EDIT: SHOW HOURS ............ the show hours card near the bottom (sample hours — change to yours)
     EDIT: ABOUT ................. the "About Our Show" card under the show hours
     EDIT: LINKS ................. your Facebook page and website (placeholders)
@@ -145,6 +145,16 @@ body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);-webkit-text-siz
 .sn .votes-left .vl{font-size:17px;font-weight:900}
 .sn .votes-left .s{font-size:12px;color:var(--pale2)}
 .sn .votes-left:has(.vl:empty){display:none}
+/* Leading the vote (Voting mode): hidden until someone votes */
+.sn .leader{display:flex;gap:12px;align-items:center}
+.sn .leader:has(.lead:empty){display:none}
+.sn .leader-text{flex:1;min-width:0}
+.sn .leader .label{color:var(--pale2)}
+.sn .lead{margin-top:4px;line-height:1.15}
+.sn .leading-vote-title{display:block;font-family:'Playfair Display',serif;font-weight:900;font-size:20px;overflow-wrap:anywhere}
+.sn .leading-vote-artist{display:block;font-size:12px;font-weight:600;color:var(--pale2);margin-top:3px}
+.sn .lcount{flex:0 0 58px;height:52px;border-radius:14px;background:var(--gold);color:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:19px;font-weight:900;line-height:1}
+.sn .lcount::after{content:"votes";font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 
 /* After hours */
 .sn .closed{background:#fff;border-radius:22px;padding:20px 18px;color:var(--ink);box-shadow:0 7px 0 var(--red-dark);display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
@@ -345,7 +355,7 @@ body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);-webkit-text-siz
 
         <div class="glass queue">
           <div class="queue-head"><span class="label">Santa's list</span><span class="qcount depth-{QUEUE_DEPTH}"><b>{QUEUE_SIZE}</b><span class="of"> of {QUEUE_DEPTH} songs</span></span></div>
-          <div class="qlist">{JUKEBOX_QUEUE}</div>
+          <div class="qlist">{JUKEBOX_QUEUE_ALL}</div>
         </div>
         <!-- EDIT: MESSAGES — shown when no songs are requested -->
         <div class="queue-empty">
@@ -367,6 +377,11 @@ body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);-webkit-text-siz
             <div class="idle-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b3121f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg></div>
             <div><div class="idle-title">Santa's on a cocoa break</div><div class="idle-text">The next song starts in a moment. Vote below for what plays next!</div></div>
           </div>
+        </div>
+        <!-- EDIT: MESSAGES — leading the vote heading. Shows once someone has voted. -->
+        <div class="glass leader">
+          <div class="leader-text"><div class="label">Most votes so far</div><div class="lead">{LEADING_VOTE}</div></div>
+          <div class="lcount">{LEADING_VOTE_COUNT}</div>
         </div>
         <!-- Shows only when a Daily Vote Limit is set -->
         <div class="glass votes-left">
